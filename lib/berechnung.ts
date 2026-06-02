@@ -7,14 +7,34 @@ export interface Branche {
 }
 
 export const BRANCHEN: Branche[] = [
+  // Bestehende Branchen – Multiplikatoren unverändert
   { wert: "bau_handwerk", label: "Bau & Handwerk", multiplikator: 4.0 },
-  { wert: "maschinen_anlagenbau", label: "Maschinen- & Anlagenbau", multiplikator: 5.5 },
-  { wert: "it_software_tech", label: "IT, Software & Tech", multiplikator: 7.0 },
   { wert: "beratung_dienstleistung", label: "Beratung & Dienstleistung", multiplikator: 4.5 },
   { wert: "handel_ecommerce", label: "Handel & E-Commerce", multiplikator: 4.5 },
   { wert: "gesundheit_pflege", label: "Gesundheit & Pflege", multiplikator: 5.5 },
-  { wert: "transport_logistik", label: "Transport & Logistik", multiplikator: 4.5 },
+  { wert: "it_software_tech", label: "IT, Software & Tech", multiplikator: 7.0 },
+  { wert: "maschinen_anlagenbau", label: "Maschinen- & Anlagenbau", multiplikator: 5.5 },
   { wert: "produktion_industrie", label: "Produktion & Industrie", multiplikator: 5.0 },
+  { wert: "transport_logistik", label: "Transport & Logistik", multiplikator: 4.5 },
+  // Ergänzte Branchen (sinnvolle Marktmultiplikatoren)
+  { wert: "bildung_coaching", label: "Bildung, Training & Coaching", multiplikator: 4.0 },
+  { wert: "chemie_kunststoff", label: "Chemie & Kunststoffe", multiplikator: 5.5 },
+  { wert: "elektrotechnik", label: "Elektrotechnik & Elektroinstallation", multiplikator: 5.0 },
+  { wert: "energie_umwelt", label: "Energie & Umwelttechnik", multiplikator: 6.0 },
+  { wert: "finanzdienstleistung", label: "Finanz- & Versicherungsdienstleistung", multiplikator: 5.5 },
+  { wert: "gastronomie_hotellerie", label: "Gastronomie & Hotellerie", multiplikator: 3.5 },
+  { wert: "immobilien", label: "Immobilien & Hausverwaltung", multiplikator: 5.0 },
+  { wert: "kfz", label: "KFZ-Handel & Werkstätten", multiplikator: 3.5 },
+  { wert: "landwirtschaft", label: "Land- & Forstwirtschaft", multiplikator: 4.0 },
+  { wert: "lebensmittel", label: "Lebensmittel & Getränke", multiplikator: 4.5 },
+  { wert: "marketing_werbung", label: "Marketing, Werbung & Kreativwirtschaft", multiplikator: 5.0 },
+  { wert: "medizintechnik", label: "Medizin- & Labortechnik", multiplikator: 6.5 },
+  { wert: "personaldienstleistung", label: "Personaldienstleistung & HR", multiplikator: 4.0 },
+  { wert: "pharma_biotech", label: "Pharma & Biotechnologie", multiplikator: 7.5 },
+  { wert: "reinigung_facility", label: "Reinigung & Facility Management", multiplikator: 4.0 },
+  { wert: "telekommunikation", label: "Telekommunikation & Medien", multiplikator: 6.0 },
+  { wert: "textil_mode", label: "Textil, Mode & Möbel", multiplikator: 4.0 },
+  { wert: "tourismus", label: "Tourismus, Reise & Freizeit", multiplikator: 4.0 },
   { wert: "sonstige", label: "Sonstige", multiplikator: 4.5 },
 ];
 
@@ -38,17 +58,21 @@ export interface KachelOpt {
 }
 
 export const MITARBEITER_KACHELN: KachelOpt[] = [
-  { wert: "1_10", label: "1 bis 10", delta: -0.25 },
-  { wert: "11_50", label: "11 bis 50", delta: 0 },
+  { wert: "keine", label: "Keine Mitarbeiter", delta: -0.5 },
+  { wert: "1_5", label: "1 bis 5", delta: -0.25 },
+  { wert: "6_10", label: "6 bis 10", delta: -0.25 },
+  { wert: "11_20", label: "11 bis 20", delta: 0 },
+  { wert: "21_50", label: "21 bis 50", delta: 0 },
   { wert: "51_250", label: "51 bis 250", delta: 0.25 },
-  { wert: "ueber_250", label: "über 250", delta: 0.5 },
+  { wert: "ueber_250", label: "Über 250", delta: 0.5 },
 ];
 
 export const ENTWICKLUNG_KACHELN: KachelOpt[] = [
   { wert: "stark_gestiegen", label: "Stark gestiegen", delta: 0.75 },
   { wert: "leicht_gestiegen", label: "Leicht gestiegen", delta: 0.25 },
   { wert: "gleich_geblieben", label: "Gleich geblieben", delta: 0 },
-  { wert: "gesunken", label: "Gesunken", delta: -0.75 },
+  { wert: "leicht_gesunken", label: "Leicht gesunken", delta: -0.25 },
+  { wert: "stark_gesunken", label: "Stark gesunken", delta: -0.75 },
 ];
 
 export const INHABER_KACHELN: KachelOpt[] = [
@@ -73,7 +97,7 @@ export const KUNDEN_KACHELN: KachelOpt[] = [
 
 export const WIEDERKEHREND_KACHELN: KachelOpt[] = [
   { wert: "sehr_hoch", label: "Sehr hoch (über 50 %)", beschreibung: "Verträge, Abos, Wartung", delta: 0.75 },
-  { wert: "mittel", label: "Mittel (20–50 %)", beschreibung: "Verträge, Abos, Wartung", delta: 0.25 },
+  { wert: "mittel", label: "Mittel (20 bis 50 %)", beschreibung: "Verträge, Abos, Wartung", delta: 0.25 },
   { wert: "gering", label: "Gering (unter 20 %)", beschreibung: "Verträge, Abos, Wartung", delta: 0 },
   { wert: "keine", label: "Keine", delta: -0.5 },
 ];
