@@ -44,14 +44,6 @@ function StepTitel({ titel, untertitel }: { titel: string; untertitel?: string }
   );
 }
 
-function Avatar({ src, alt }: { src: string; alt: string }) {
-  return (
-    <span className="relative block h-11 w-11 overflow-hidden rounded-full ring-2 ring-white">
-      <Image src={src} alt={alt} fill sizes="44px" className="object-cover object-top" />
-    </span>
-  );
-}
-
 function Haken({ text }: { text: string }) {
   return (
     <span className="inline-flex items-center gap-1.5">
@@ -163,6 +155,8 @@ export default function RechnerWizard() {
   const submit5 = (e: React.FormEvent) => {
     e.preventDefault();
     const neu: Record<string, string> = {};
+    if (!vorname) neu.vorname = "Bitte gib deinen Vornamen ein.";
+    if (!nachname) neu.nachname = "Bitte gib deinen Nachnamen ein.";
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
       neu.email = "Bitte gib eine gültige E-Mail-Adresse ein.";
     if (!mobil) neu.mobil = "Bitte gib deine Mobilnummer ein.";
@@ -208,10 +202,7 @@ export default function RechnerWizard() {
           {/* ---------- Schritt 1 ---------- */}
           {ansicht === 1 && (
             <form onSubmit={submit1} className="space-y-6">
-              <StepTitel
-                titel="Erzähl uns kurz von deinem Unternehmen"
-                untertitel="Ein paar Eckdaten genügen für die erste Einschätzung."
-              />
+              <StepTitel titel="Erzähl uns kurz von deinem Unternehmen" />
               <AuswahlFeld label="Branche" pflicht optionen={opt(BRANCHEN)} platzhalter="Bitte wählen"
                 value={branche} onChange={(e) => { setBranche(e.target.value); clear("branche"); }} fehler={fehler.branche} />
               <AuswahlFeld label="Rechtsform" pflicht optionen={opt(RECHTSFORMEN)} platzhalter="Bitte wählen"
@@ -225,12 +216,8 @@ export default function RechnerWizard() {
           {/* ---------- Schritt 2 ---------- */}
           {ansicht === 2 && (
             <form onSubmit={submit2} className="space-y-6">
-              <StepTitel
-                titel="Deine Zahlen"
-                untertitel="Grobe Angaben genügen – du musst nicht in den Unterlagen nachschauen."
-              />
               <FormFeld
-                label="Ungefährer Jahresumsatz"
+                label="Ungefährer Jahresumsatz (keine Kommastellen)"
                 pflicht
                 inputMode="numeric"
                 placeholder="z. B. 1.200.000"
@@ -241,7 +228,7 @@ export default function RechnerWizard() {
                 fehler={fehler.umsatz}
               />
               <FormFeld
-                label="Ungefährer Gewinn vor Steuern"
+                label="Ungefährer Gewinn vor Steuern (keine Kommastellen)"
                 pflicht
                 inputMode="numeric"
                 placeholder="z. B. 400.000"
@@ -260,10 +247,6 @@ export default function RechnerWizard() {
           {/* ---------- Schritt 3 ---------- */}
           {ansicht === 3 && (
             <form onSubmit={submit3} className="space-y-6">
-              <StepTitel
-                titel="Wie ist dein Unternehmen aufgestellt?"
-                untertitel="Diese Faktoren beeinflussen den Wert oft stärker als die reinen Zahlen."
-              />
               <AuswahlFeld label="Wie stark hängt das Tagesgeschäft von dir persönlich ab?" pflicht optionen={opt(INHABER_KACHELN)} platzhalter="Bitte wählen"
                 value={inhaber} onChange={(e) => { setInhaber(e.target.value); clear("inhaber"); }} fehler={fehler.inhaber} />
               <AuswahlFeld label="Gibt es eine zweite Führungsebene?" pflicht optionen={opt(FUEHRUNGSEBENE_KACHELN)} platzhalter="Bitte wählen"
@@ -277,10 +260,6 @@ export default function RechnerWizard() {
           {/* ---------- Schritt 4 ---------- */}
           {ansicht === 4 && (
             <form onSubmit={submit4} className="space-y-6">
-              <StepTitel
-                titel="Markt & Zukunftsfähigkeit"
-                untertitel="Wie stabil und zukunftssicher ist dein Geschäftsmodell?"
-              />
               <AuswahlFeld label="Anteil wiederkehrender Umsätze" pflicht optionen={opt(WIEDERKEHREND_KACHELN)} platzhalter="Bitte wählen"
                 value={wiederkehrend} onChange={(e) => { setWiederkehrend(e.target.value); clear("wiederkehrend"); }} fehler={fehler.wiederkehrend} />
               <AuswahlFeld label="Marktposition" pflicht optionen={opt(MARKTPOSITION_KACHELN)} platzhalter="Bitte wählen"
@@ -294,13 +273,9 @@ export default function RechnerWizard() {
           {/* ---------- Schritt 5 ---------- */}
           {ansicht === 5 && (
             <form onSubmit={submit5} className="space-y-5">
-              <StepTitel
-                titel="Wohin dürfen wir dein Ergebnis senden?"
-                untertitel="Du erhältst deine Einschätzung sofort hier auf der Seite."
-              />
               <div className="grid gap-5 sm:grid-cols-2">
-                <FormFeld label="Vorname" placeholder="Max" value={vorname} onChange={(e) => setVorname(e.target.value)} />
-                <FormFeld label="Nachname" placeholder="Mustermann" value={nachname} onChange={(e) => setNachname(e.target.value)} />
+                <FormFeld label="Vorname" pflicht placeholder="Max" value={vorname} onChange={(e) => { setVorname(e.target.value); clear("vorname"); }} fehler={fehler.vorname} />
+                <FormFeld label="Nachname" pflicht placeholder="Mustermann" value={nachname} onChange={(e) => { setNachname(e.target.value); clear("nachname"); }} fehler={fehler.nachname} />
               </div>
               <FormFeld label="E-Mail-Adresse" pflicht type="email" placeholder="max@musterfirma.de"
                 value={email} onChange={(e) => { setEmail(e.target.value); clear("email"); }} fehler={fehler.email} />
@@ -314,9 +289,6 @@ export default function RechnerWizard() {
           {ansicht === "ergebnis" && ergebnis && (
             <div>
               <div className="-mx-6 -mt-6 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 px-6 py-10 text-center text-white sm:-mx-8 sm:-mt-8 sm:px-8 sm:py-12">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-blue-200 ring-1 ring-white/15">
-                  Deine erste Einschätzung
-                </span>
                 <p className="mt-5 text-base font-medium text-slate-300 sm:text-lg">
                   Der aktuell geschätzte Wert deiner Firma liegt bei:
                 </p>
@@ -329,18 +301,7 @@ export default function RechnerWizard() {
 
               <div className="mt-8 space-y-5">
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="flex -space-x-3">
-                      <Avatar src="/images/Michael-Otter.png" alt="Michael Polit" />
-                      <Avatar src="/images/Fabian-Otter.png" alt="Fabian Zamzau" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">Deine Ansprechpartner</p>
-                      <p className="text-xs text-slate-500">Michael Polit &amp; Fabian Zamzau · Otter Consult</p>
-                    </div>
-                  </div>
-
-                  <p className="mt-4 text-sm leading-relaxed text-slate-700">
+                  <p className="text-sm leading-relaxed text-slate-700">
                     Dieser Wert basiert auf deinen Angaben und den aktuellen Marktwerten deiner Branche.
                     Der tatsächliche Verkaufspreis wird von vielen weiteren Faktoren beeinflusst – genau
                     hier entstehen oft die größten Potenziale.
