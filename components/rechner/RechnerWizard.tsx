@@ -331,12 +331,12 @@ export default function RechnerWizard() {
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-6">
                   <div className="flex items-center gap-3">
                     <div className="flex -space-x-3">
-                      <Avatar src="/images/Michael-Otter.png" alt="Michael Otter" />
-                      <Avatar src="/images/Fabian-Otter.png" alt="Fabian Otter" />
+                      <Avatar src="/images/Michael-Otter.png" alt="Michael Polit" />
+                      <Avatar src="/images/Fabian-Otter.png" alt="Fabian Zamzau" />
                     </div>
                     <div>
                       <p className="text-sm font-bold text-slate-900">Deine Ansprechpartner</p>
-                      <p className="text-xs text-slate-500">Michael &amp; Fabian Otter · Otter Consult</p>
+                      <p className="text-xs text-slate-500">Michael Polit &amp; Fabian Zamzau · Otter Consult</p>
                     </div>
                   </div>
 

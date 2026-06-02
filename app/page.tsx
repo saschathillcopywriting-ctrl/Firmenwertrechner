@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RechnerWizard from "@/components/rechner/RechnerWizard";
 
@@ -77,12 +77,6 @@ const SCHRITTE_HOW: { titel: string; text: string }[] = [
   { titel: "Dein individuelles Ergebnis", text: "Du siehst sofort eine realistische Spanne, in der dein Firmenwert aktuell liegt. Kostenlos und direkt auf der Seite." },
 ];
 
-const VERTRAUEN: { titel: string; text: string }[] = [
-  { titel: "Spezialisiert auf den Mittelstand", text: "Wir kennen die Besonderheiten inhabergeführter Unternehmen – und sprechen deine Sprache." },
-  { titel: "Diskret & vertrauensvoll", text: "Dein Vorhaben und deine Zahlen behandeln wir absolut vertraulich. Ohne Ausnahme." },
-  { titel: "Von der Bewertung bis zum Abschluss", text: "Wir begleiten dich persönlich durch den gesamten Prozess – fundiert und auf Augenhöhe." },
-];
-
 const FAQS: { frage: string; antwort: string }[] = [
   { frage: "Ist die Wertermittlung wirklich kostenlos?", antwort: "Ja, zu 100 %. Du gibst deine Eckdaten ein und erhältst sofort eine erste Einschätzung – ohne Kosten und Verpflichtung." },
   { frage: "Wie genau ist das Ergebnis?", antwort: "Der Rechner liefert eine fundierte erste Orientierung auf Basis aktueller Marktwerte und des anerkannten Multiplikator-Verfahrens. Du bekommst eine realistische Spanne, in der dein Firmenwert aktuell liegt – ideal, um ein belastbares Gefühl für die Größenordnung zu bekommen." },
@@ -99,7 +93,7 @@ const TRUST = ["100 % kostenlos & unverbindlich", "In wenigen Minuten erledigt",
 /* ------------------------------------------------------------------ */
 function FaqItem({ frage, antwort, offen, onToggle }: { frage: string; antwort: string; offen: boolean; onToggle: () => void }) {
   return (
-    <div className={`overflow-hidden rounded-2xl border bg-white transition-all duration-200 ${offen ? "border-blue-200 shadow-lg shadow-blue-900/5" : "border-slate-200 hover:border-slate-300"}`}>
+    <div className={`overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-200 ${offen ? "border-blue-200 bg-white shadow-lg shadow-blue-900/5" : "border-slate-200 bg-white/90 hover:border-slate-300"}`}>
       <button type="button" onClick={onToggle} aria-expanded={offen} className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7">
         <span className="text-base font-semibold text-slate-900 sm:text-lg">{frage}</span>
         <span className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${offen ? "rotate-180 bg-blue-600 text-white" : "bg-slate-100 text-slate-500"}`}>
@@ -118,7 +112,7 @@ function FaqItem({ frage, antwort, offen, onToggle }: { frage: string; antwort: 
 /* ------------------------------------------------------------------ */
 /*  CTA-Button                                                         */
 /* ------------------------------------------------------------------ */
-function CtaButton({ onClick, variant = "primary", className = "" }: { onClick: () => void; variant?: "primary" | "dark" | "light"; className?: string }) {
+function CtaButton({ onClick, variant = "primary", className = "", arrow = true }: { onClick: () => void; variant?: "primary" | "dark" | "light"; className?: string; arrow?: boolean }) {
   const styles = {
     primary: "bg-blue-600 text-white shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:shadow-blue-600/40",
     dark: "bg-slate-900 text-white shadow-lg hover:bg-slate-800",
@@ -127,8 +121,69 @@ function CtaButton({ onClick, variant = "primary", className = "" }: { onClick: 
   return (
     <button type="button" onClick={onClick} className={`group inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-base font-semibold transition-all duration-300 ${styles} ${className}`}>
       Jetzt Firmenwert ermitteln
-      <ArrowUpIcon className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
+      {arrow && <ArrowUpIcon className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />}
     </button>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  3 Schritte – mit Scroll-Hervorhebung des aktiven Schritts          */
+/* ------------------------------------------------------------------ */
+function AblaufSchritte() {
+  const [aktiv, setAktiv] = useState(0);
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setAktiv(Number((e.target as HTMLElement).dataset.index));
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    refs.current.forEach((el) => el && obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div className="relative mx-auto mt-16 max-w-3xl">
+      {/* Verbindungslinie + Fortschritt */}
+      <div aria-hidden className="absolute bottom-8 left-8 top-8 w-px bg-slate-200 sm:left-10" />
+      <div
+        aria-hidden
+        className="absolute left-8 top-8 w-px bg-gradient-to-b from-blue-500 to-blue-600 transition-all duration-700 ease-out sm:left-10"
+        style={{ height: `calc((100% - 4rem) * ${(aktiv + 1) / SCHRITTE_HOW.length})` }}
+      />
+
+      <div className="space-y-6 sm:space-y-10">
+        {SCHRITTE_HOW.map((s, i) => {
+          const on = i === aktiv;
+          return (
+            <div
+              key={s.titel}
+              ref={(el) => { refs.current[i] = el; }}
+              data-index={i}
+              className={`relative flex items-start gap-5 transition-all duration-500 sm:gap-8 ${on ? "opacity-100" : "opacity-40"}`}
+            >
+              <div
+                className={`relative z-10 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl text-2xl font-bold transition-all duration-500 sm:h-20 sm:w-20 ${
+                  on
+                    ? "scale-105 bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-xl shadow-blue-600/40"
+                    : "bg-white text-slate-400 ring-1 ring-slate-200"
+                }`}
+              >
+                {i + 1}
+              </div>
+              <div className={`flex-1 rounded-2xl p-5 transition-all duration-500 sm:p-7 ${on ? "bg-white shadow-xl shadow-slate-900/5 ring-1 ring-blue-100" : ""}`}>
+                <h3 className={`text-xl font-bold transition-colors duration-500 sm:text-2xl ${on ? "text-slate-900" : "text-slate-500"}`}>{s.titel}</h3>
+                <p className="mt-2 leading-relaxed text-slate-600">{s.text}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -141,17 +196,32 @@ export default function LandingPage() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   const zumRechner = () => scrollToId("rechner");
 
+  const NAV = [
+    { label: "Warum Firmenwert ermitteln", id: "warum" },
+    { label: "Wie funktioniert es", id: "ablauf" },
+    { label: "Fragen & Antworten", id: "faq" },
+  ];
+
   return (
     <div className="font-sans bg-slate-950">
       {/* ============================================================ */}
       {/*  HEADER                                                      */}
       {/* ============================================================ */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
-          <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center" aria-label="Otter Consult – zum Seitenanfang">
-            <Image src="/images/Logo-Otter.png" alt="Otter Consult" width={1500} height={1297} priority className="h-9 w-auto sm:h-10" />
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-4 sm:h-24 sm:px-6">
+          <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex flex-shrink-0 items-center" aria-label="Otter Consult – zum Seitenanfang">
+            <Image src="/images/Logo-Otter.png" alt="Otter Consult" width={1500} height={1297} priority className="h-12 w-auto sm:h-16" />
           </button>
-          <CtaButton onClick={zumRechner} variant="primary" className="!px-4 !py-2.5 !text-sm sm:!px-6 sm:!py-3 sm:!text-base" />
+          <nav className="hidden items-center gap-8 lg:flex">
+            {NAV.map((n) => (
+              <button key={n.id} type="button" onClick={() => scrollToId(n.id)} className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600">
+                {n.label}
+              </button>
+            ))}
+          </nav>
+          <button type="button" onClick={zumRechner} className="flex-shrink-0 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-600/40 sm:px-6 sm:py-3 sm:text-base">
+            Jetzt Firmenwert ermitteln
+          </button>
         </div>
       </header>
 
@@ -168,15 +238,15 @@ export default function LandingPage() {
           WebkitMaskImage: "radial-gradient(ellipse 75% 60% at 50% 30%, black, transparent)",
         }} />
 
-        <div className="relative mx-auto max-w-3xl px-4 pt-14 text-center sm:pt-20">
+        <div className="relative mx-auto max-w-5xl px-4 pt-12 text-center sm:pt-16">
           <p className="text-sm font-semibold tracking-wide text-blue-300 sm:text-base">
             Für Unternehmer, die ihr Lebenswerk nicht dem Zufall überlassen wollen
           </p>
-          <h1 className="mt-5 text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mx-auto mt-4 max-w-5xl text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
             Was würde ein Käufer heute für deine Firma{" "}
             <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">wirklich zahlen?</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-4xl text-base leading-relaxed text-slate-300 sm:text-lg">
             Gib ein paar Eckdaten zu deinem Unternehmen ein und erhalte sofort eine erste Einschätzung
             deines Firmenwerts – basierend auf aktuellen Marktwerten und dem Verfahren, das auch Käufer
             und Berater nutzen.
@@ -184,15 +254,15 @@ export default function LandingPage() {
         </div>
 
         {/* Berater + Rechner */}
-        <div className="relative mx-auto mt-12 max-w-7xl px-4 pb-16 sm:pb-20">
+        <div className="relative mx-auto mt-10 max-w-7xl px-4 pb-14 sm:pb-16">
           <div className="grid items-end gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)_minmax(0,1fr)]">
             {/* Michael links */}
             <div className="relative hidden items-end justify-center lg:flex">
               <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-blue-500/25 blur-3xl" />
               <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-2xl shadow-blue-950/50 ring-1 ring-white/10">
-                <Image src="/images/Michael-Otter.png" alt="Michael Otter, Berater bei Otter Consult" width={1112} height={1667} sizes="320px" className="h-auto w-full" />
+                <Image src="/images/Michael-Otter.png" alt="Michael Polit, Berater bei Otter Consult" width={1112} height={1667} sizes="320px" className="h-auto w-full" />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent px-5 pb-5 pt-14">
-                  <p className="text-base font-bold text-white">Michael Otter</p>
+                  <p className="text-base font-bold text-white">Michael Polit</p>
                   <p className="text-xs text-blue-200">Otter Consult</p>
                 </figcaption>
               </figure>
@@ -210,17 +280,17 @@ export default function LandingPage() {
             <div className="relative hidden items-end justify-center lg:flex">
               <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-sky-500/25 blur-3xl" />
               <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-2xl shadow-blue-950/50 ring-1 ring-white/10">
-                <Image src="/images/Fabian-Otter.png" alt="Fabian Otter, Berater bei Otter Consult" width={1707} height={2560} sizes="320px" className="h-auto w-full" />
+                <Image src="/images/Fabian-Otter.png" alt="Fabian Zamzau, Berater bei Otter Consult" width={1707} height={2560} sizes="320px" className="h-auto w-full" />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent px-5 pb-5 pt-14">
-                  <p className="text-base font-bold text-white">Fabian Otter</p>
+                  <p className="text-base font-bold text-white">Fabian Zamzau</p>
                   <p className="text-xs text-blue-200">Otter Consult</p>
                 </figcaption>
               </figure>
             </div>
           </div>
 
-          {/* Trust-Zeile */}
-          <div className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-x-6 gap-y-3">
+          {/* Trust-Zeile – zentriert, horizontale Reihe, gleichmäßige Abstände */}
+          <div className="mx-auto mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-10">
             {TRUST.map((t) => (
               <span key={t} className="inline-flex items-center gap-2 text-sm text-slate-300">
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
@@ -236,19 +306,28 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 2 – WARUM (4 Gründe)                                */}
       {/* ============================================================ */}
-      <section id="warum" className="scroll-mt-20 bg-gradient-to-b from-white to-slate-50 py-20 sm:py-28">
-        <div className="mx-auto max-w-6xl px-4">
+      <section id="warum" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-white to-slate-50 py-20 sm:py-28">
+        {/* dezente Struktur */}
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{
+          backgroundImage: "radial-gradient(rgba(37,99,235,0.07) 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+          maskImage: "radial-gradient(ellipse 85% 75% at 50% 35%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 85% 75% at 50% 35%, black, transparent)",
+        }} />
+        <div aria-hidden className="pointer-events-none absolute -left-24 top-24 h-80 w-80 rounded-full bg-blue-100/50 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -right-24 bottom-10 h-80 w-80 rounded-full bg-sky-100/40 blur-3xl" />
+
+        <div className="relative mx-auto max-w-6xl px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-600">Gute Gründe</span>
-            <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               4 Gründe, warum du auch ohne Verkaufsabsicht den Wert deiner Firma kennen solltest
             </h2>
           </div>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2">
             {VORTEILE.map((v) => (
-              <div key={v.titel} className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-blue-900/10">
-                <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-50 transition-all duration-500 group-hover:scale-[2.2] group-hover:bg-blue-100/60" />
+              <div key={v.titel} className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-blue-50/60 p-8 shadow-md shadow-slate-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/10">
+                <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-100/50 transition-all duration-500 group-hover:scale-[2.2] group-hover:bg-blue-100/70" />
                 <div className="relative">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-600/30 transition-transform duration-300 group-hover:scale-105">
                     {v.icon}
@@ -263,67 +342,9 @@ export default function LandingPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SEKTION 3 – VERTRAUEN (Otter Consult)                       */}
+      {/*  SEKTION 3 – SO FUNKTIONIERT'S (3 Schritte)                  */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden bg-slate-950 py-20 sm:py-28">
-        <div aria-hidden className="pointer-events-none absolute left-[-10%] top-1/3 h-[420px] w-[420px] rounded-full bg-blue-600/15 blur-[130px]" />
-        <div className="relative mx-auto max-w-6xl px-4">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div className="relative order-2 lg:order-1">
-              <div aria-hidden className="absolute -inset-4 rounded-[2rem] bg-blue-600/20 blur-3xl" />
-              <div className="relative overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/10">
-                <Image src="/images/Fabian-Otter-Frau.png" alt="Das Beraterteam von Otter Consult" width={2560} height={1707} sizes="(min-width: 1024px) 50vw, 100vw" className="h-auto w-full" />
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2">
-              <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-400">Otter Consult</span>
-              <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-                Warum Unternehmer bei Firmenverkauf und Nachfolge auf Otter Consult vertrauen
-              </h2>
-              <p className="mt-5 leading-relaxed text-slate-300">
-                Der Verkauf des eigenen Unternehmens ist eine der wichtigsten Entscheidungen im Leben eines
-                Unternehmers. Genau deshalb begleiten wir dich mit Erfahrung, Diskretion und einem klaren
-                Blick für den wahren Wert deines Lebenswerks.
-              </p>
-
-              <ul className="mt-8 space-y-5">
-                {VERTRAUEN.map((p) => (
-                  <li key={p.titel} className="flex gap-4">
-                    <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-white">
-                      <CheckIcon className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="font-semibold text-white">{p.titel}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-400">{p.text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-8 flex flex-wrap gap-8 border-t border-white/10 pt-8">
-                <div>
-                  <p className="text-3xl font-bold text-white">125 Mio. €+</p>
-                  <p className="mt-1 text-sm text-slate-400">jährliches Transaktionsvolumen</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-white">100 %</p>
-                  <p className="mt-1 text-sm text-slate-400">Fokus auf den Mittelstand</p>
-                </div>
-              </div>
-
-              <div className="mt-10">
-                <CtaButton onClick={zumRechner} variant="primary" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/*  SEKTION 4 – SO FUNKTIONIERT'S (3 Schritte)                  */}
-      {/* ============================================================ */}
-      <section id="ablauf" className="scroll-mt-20 bg-slate-50 py-20 sm:py-28">
+      <section id="ablauf" className="scroll-mt-24 bg-slate-50 py-20 sm:py-28">
         <div className="mx-auto max-w-5xl px-4">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-600">So funktioniert&apos;s</span>
@@ -337,18 +358,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="relative mt-16 grid gap-8 sm:grid-cols-3 sm:gap-6">
-            <div aria-hidden className="absolute left-[16%] right-[16%] top-7 hidden h-0.5 bg-gradient-to-r from-blue-200 via-blue-300 to-blue-200 sm:block" />
-            {SCHRITTE_HOW.map((s, i) => (
-              <div key={s.titel} className="relative flex flex-col items-center text-center">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-xl font-bold text-white shadow-lg shadow-blue-600/30 ring-8 ring-slate-50">
-                  {i + 1}
-                </div>
-                <h3 className="mt-6 text-lg font-bold text-slate-900">{s.titel}</h3>
-                <p className="mt-2 leading-relaxed text-slate-600">{s.text}</p>
-              </div>
-            ))}
-          </div>
+          <AblaufSchritte />
 
           <p className="mx-auto mt-14 max-w-2xl text-center leading-relaxed text-slate-600">
             So bekommst du in nur wenigen Minuten eine fundierte erste Orientierung ganz ohne
@@ -361,14 +371,18 @@ export default function LandingPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SEKTION 5 – FAQ                                             */}
+      {/*  SEKTION 4 – FAQ (mit Bild-Wasserzeichen)                    */}
       {/* ============================================================ */}
-      <section id="faq" className="scroll-mt-20 bg-white py-20 sm:py-28">
-        <div className="mx-auto max-w-3xl px-4">
+      <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white py-20 sm:py-28">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <Image src="/images/Fabian-Otter-Frau.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.07]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white" />
+        </div>
+
+        <div className="relative mx-auto max-w-3xl px-4">
           <div className="text-center">
-            <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-600">FAQ</span>
-            <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-              Bevor du loslegst, das Wichtigste in Kürze
+            <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
+              Bevor du loslegst: Das Wichtigste in Kürze
             </h2>
           </div>
 
@@ -387,35 +401,30 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  FOOTER                                                      */}
       {/* ============================================================ */}
-      <footer className="border-t border-white/10 bg-slate-950 py-14">
+      <footer className="border-t border-white/10 bg-slate-950 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid gap-10 md:grid-cols-3 md:items-start">
-            {/* Links: Logo */}
-            <div>
-              <Image src="/images/Logo-Otter.png" alt="Otter Consult" width={1500} height={1297} className="h-10 w-auto brightness-0 invert" />
-              <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
-                Deine Spezialisten für Firmenverkauf und Nachfolge im Mittelstand.
-              </p>
-            </div>
+          <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between md:gap-10">
+            {/* Logo links (größer) */}
+            <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex-shrink-0" aria-label="Otter Consult – zum Seitenanfang">
+              <Image src="/images/Logo-Otter.png" alt="Otter Consult" width={1500} height={1297} className="h-14 w-auto brightness-0 invert sm:h-16" />
+            </button>
 
-            {/* Mitte: Navigation */}
-            <nav className="flex flex-col gap-3 md:items-center">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">Navigation</p>
-              <button onClick={() => scrollToId("warum")} className="text-left text-sm text-slate-300 transition-colors hover:text-white">Warum Firmenwert ermitteln</button>
-              <button onClick={() => scrollToId("ablauf")} className="text-left text-sm text-slate-300 transition-colors hover:text-white">Wie funktioniert es</button>
-              <button onClick={() => scrollToId("faq")} className="text-left text-sm text-slate-300 transition-colors hover:text-white">Fragen &amp; Antworten</button>
+            {/* Navigation mittig */}
+            <nav className="flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
+              {NAV.map((n) => (
+                <button key={n.id} type="button" onClick={() => scrollToId(n.id)} className="text-sm text-slate-300 transition-colors hover:text-white">
+                  {n.label}
+                </button>
+              ))}
             </nav>
 
-            {/* Rechts: CTA */}
-            <div className="flex flex-col gap-4 md:items-end">
-              <p className="text-sm leading-relaxed text-slate-400 md:text-right">
-                Erfahre in wenigen Minuten, was dein Unternehmen heute wert ist.
-              </p>
+            {/* CTA rechts */}
+            <div className="flex-shrink-0">
               <CtaButton onClick={zumRechner} variant="primary" />
             </div>
           </div>
 
-          <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl leading-relaxed">
               Die Wertermittlung liefert eine unverbindliche erste Orientierung auf Basis des
               Multiplikator-Verfahrens und ersetzt keine individuelle Unternehmensbewertung.
