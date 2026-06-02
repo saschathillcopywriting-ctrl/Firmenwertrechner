@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FormFeld } from "@/components/ui/FormFeld";
 import { AuswahlFeld } from "@/components/ui/AuswahlFeld";
 import NavButtons from "@/components/ui/NavButtons";
+import AuswahlKacheln from "@/components/ui/AuswahlKacheln";
 import { useFormularStore } from "@/store/formular-store";
 import {
   BRANCHEN,
@@ -21,7 +22,60 @@ import {
   formatEuro,
 } from "@/lib/berechnung";
 
-type Ansicht = 1 | 2 | 3 | 4 | 5 | "ergebnis" | "danke";
+type Ansicht = 1 | 2 | 3 | 4 | 5 | "ergebnis" | "funnel1" | "funnel2" | "danke";
+
+const FUNNEL_FRAGEN = [
+  {
+    key: "verkaufszeitpunkt",
+    frage: "Wann planst du aktuell einen möglichen Verkauf oder eine Nachfolge?",
+    antworten: [
+      "Innerhalb der nächsten 12 Monate",
+      "In 1 bis 3 Jahren",
+      "In 3 bis 5 Jahren",
+      "In mehr als 5 Jahren",
+      "Aktuell nicht geplant – ich möchte meinen Firmenwert kennen",
+    ],
+  },
+  {
+    key: "hauptgrund",
+    frage: "Was ist dein Hauptgrund für die Firmenwertermittlung?",
+    antworten: [
+      "Unternehmensverkauf vorbereiten",
+      "Nachfolge planen",
+      "Vermögensübersicht erhalten",
+      "Unternehmenswert steigern",
+      "Investoren / Partner gewinnen",
+      "Sonstiges",
+    ],
+  },
+  {
+    key: "aussage",
+    frage: "Welche Aussage trifft aktuell am ehesten auf dein Unternehmen zu?",
+    antworten: [
+      "Stark wachsend",
+      "Stabil etabliert",
+      "Wachstum möglich, aber ausbaufähig",
+      "Hohe Inhaberabhängigkeit",
+      "Nachfolge bereits in Planung",
+    ],
+  },
+];
+
+const GESPRAECH_VORTEILE = [
+  "Welche Faktoren deinen Firmenwert aktuell erhöhen oder senken",
+  "Welche Maßnahmen den Unternehmenswert oft deutlich steigern können",
+  "Welche Verkaufspreise aktuell in deiner Branche realistisch sind",
+  "Welche Optionen du für Nachfolge, Verkauf oder strategische Vorbereitung hast",
+  "Und du bekommst Antworten auf all deine Fragen.",
+];
+
+const DANKE_VORTEILE = [
+  "Ein Blick hinter deinen geschätzten Firmenwert",
+  "Eine Einordnung deines Unternehmenswertes anhand deiner individuellen Situation",
+  "Hinweise auf Werttreiber und mögliche Risiken in deinem Unternehmen",
+  "Erste Empfehlungen, wie sich der Firmenwert häufig steigern lässt",
+  "Antworten auf deine Fragen zu Nachfolge, Verkauf oder Unternehmensentwicklung",
+];
 
 /* --- Zahlen-Helfer: Anzeige formatiert, Speicherung als reine Ziffern --- */
 const nurZiffern = (s: string) => s.replace(/[^\d]/g, "");
@@ -93,6 +147,9 @@ export default function RechnerWizard() {
   const [nachname, setNachname] = useState(daten.kontakt.nachname);
   const [email, setEmail] = useState(daten.kontakt.email);
   const [mobil, setMobil] = useState(daten.kontakt.mobil);
+  // Beratungs-Funnel nach der Ergebnisseite
+  const [funnelAntworten, setFunnelAntworten] = useState<Record<string, string>>({});
+  const [anmerkung, setAnmerkung] = useState("");
 
   const ergebnis = berechne(daten);
 
@@ -165,6 +222,29 @@ export default function RechnerWizard() {
     gehZu("ergebnis");
   };
 
+  const submitFunnel1 = (e: React.FormEvent) => {
+    e.preventDefault();
+    const neu: Record<string, string> = {};
+    FUNNEL_FRAGEN.forEach((f) => {
+      if (!funnelAntworten[f.key]) neu[f.key] = "Bitte wähle eine Option aus.";
+    });
+    if (Object.keys(neu).length) return setFehler(neu);
+    gehZu("funnel2");
+  };
+
+  const submitFunnel2 = (e: React.FormEvent) => {
+    e.preventDefault();
+    const neu: Record<string, string> = {};
+    if (!vorname) neu.vorname = "Bitte gib deinen Vornamen ein.";
+    if (!nachname) neu.nachname = "Bitte gib deinen Nachnamen ein.";
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      neu.email = "Bitte gib eine gültige E-Mail-Adresse ein.";
+    if (!mobil) neu.mobil = "Bitte gib deine Telefonnummer ein.";
+    if (Object.keys(neu).length) return setFehler(neu);
+    aktualisiereKontakt({ vorname, nachname, email, mobil });
+    gehZu("danke");
+  };
+
   const neuStarten = () => {
     zuruecksetzen();
     setBranche(""); setRechtsform(""); setMitarbeiter("");
@@ -172,6 +252,7 @@ export default function RechnerWizard() {
     setInhaber(""); setFuehrung(""); setKunden("");
     setWiederkehrend(""); setMarktposition(""); setDokumentation("");
     setVorname(""); setNachname(""); setEmail(""); setMobil("");
+    setFunnelAntworten({}); setAnmerkung("");
     gehZu(1);
   };
 
@@ -193,6 +274,26 @@ export default function RechnerWizard() {
               <div
                 className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
                 style={{ width: `${(ansicht / 5) * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Fortschritt im Beratungs-Funnel */}
+        {(ansicht === "funnel1" || ansicht === "funnel2") && (
+          <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-4 sm:px-8">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600">
+                Kostenloses Beratungsgespräch
+              </span>
+              <span className="text-xs font-semibold text-slate-500">
+                Schritt {ansicht === "funnel1" ? 1 : 2} von 2
+              </span>
+            </div>
+            <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
+                style={{ width: `${((ansicht === "funnel1" ? 1 : 2) / 2) * 100}%` }}
               />
             </div>
           </div>
@@ -313,7 +414,7 @@ export default function RechnerWizard() {
                   </p>
 
                   <button
-                    onClick={() => gehZu("danke")}
+                    onClick={() => gehZu("funnel1")}
                     className="mt-5 w-full rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-600/30 transition-colors hover:bg-blue-700"
                   >
                     Jetzt kostenloses Beratungsgespräch vereinbaren
@@ -338,6 +439,78 @@ export default function RechnerWizard() {
             </div>
           )}
 
+          {/* ---------- Funnel Schritt 1 von 2 ---------- */}
+          {ansicht === "funnel1" && (
+            <form onSubmit={submitFunnel1} className="space-y-7">
+              <div>
+                <h3 className="text-xl font-bold leading-snug text-slate-900 sm:text-2xl">
+                  Du hast jetzt deinen ungefähren Firmenwert gesehen. Lass uns jetzt einen Blick hinter die Zahl werfen.
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                  Denn der tatsächliche Verkaufspreis hängt von vielen Faktoren ab, die ein Rechner nicht vollständig berücksichtigen kann.
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  In einem kostenfreien und unverbindlichen Gespräch schauen wir gemeinsam auf dein Unternehmen und zeigen dir:
+                </p>
+                <ul className="mt-4 space-y-2.5">
+                  {GESPRAECH_VORTEILE.map((v) => (
+                    <li key={v} className="flex items-start gap-2.5 text-sm leading-relaxed text-slate-700">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                        <svg className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
+                      {v}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="space-y-7 border-t border-slate-100 pt-7">
+                {FUNNEL_FRAGEN.map((f) => (
+                  <AuswahlKacheln
+                    key={f.key}
+                    label={f.frage}
+                    pflicht
+                    spalten={2}
+                    optionen={f.antworten.map((a) => ({ wert: a, label: a }))}
+                    wert={funnelAntworten[f.key] ?? ""}
+                    onChange={(w) => { setFunnelAntworten((p) => ({ ...p, [f.key]: w })); clear(f.key); }}
+                    fehler={fehler[f.key]}
+                  />
+                ))}
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-sm font-medium text-gray-700">
+                    Gibt es etwas, das wir vor dem Gespräch wissen sollten?{" "}
+                    <span className="font-normal text-gray-400">(optional)</span>
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={anmerkung}
+                    onChange={(e) => setAnmerkung(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-colors hover:border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+
+              <NavButtons onZurueck={() => gehZu("ergebnis")} weiterText="Weiter zu Schritt 2" />
+            </form>
+          )}
+
+          {/* ---------- Funnel Schritt 2 von 2 ---------- */}
+          {ansicht === "funnel2" && (
+            <form onSubmit={submitFunnel2} className="space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <FormFeld label="Vorname" pflicht placeholder="Max" value={vorname} onChange={(e) => { setVorname(e.target.value); clear("vorname"); }} fehler={fehler.vorname} />
+                <FormFeld label="Nachname" pflicht placeholder="Mustermann" value={nachname} onChange={(e) => { setNachname(e.target.value); clear("nachname"); }} fehler={fehler.nachname} />
+              </div>
+              <FormFeld label="E-Mail-Adresse" pflicht type="email" placeholder="max@musterfirma.de"
+                value={email} onChange={(e) => { setEmail(e.target.value); clear("email"); }} fehler={fehler.email} />
+              <FormFeld label="Telefonnummer" pflicht type="tel" placeholder="+49 151 12345678"
+                value={mobil} onChange={(e) => { setMobil(e.target.value); clear("mobil"); }} fehler={fehler.mobil} />
+              <NavButtons onZurueck={() => gehZu("funnel1")} weiterText="Absenden" />
+            </form>
+          )}
+
           {/* ---------- Danke ---------- */}
           {ansicht === "danke" && (
             <div className="text-center">
@@ -346,10 +519,11 @@ export default function RechnerWizard() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="mt-5 text-2xl font-bold text-slate-900">Vielen Dank!</h3>
+              <h3 className="mx-auto mt-5 max-w-xl text-2xl font-bold leading-snug text-slate-900 sm:text-3xl">
+                Deine Anfrage wurde erfolgreich übermittelt.
+              </h3>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-600">
-                Wir haben deine Angaben erhalten und melden uns innerhalb von 24 bis 48 Stunden
-                persönlich bei dir – diskret und auf Augenhöhe.
+                Einer unserer Experten wird sich innerhalb der nächsten 24 bis 48 Stunden persönlich bei dir melden.
               </p>
 
               {/* Dekorative Bilder: leicht überlappend & versetzt */}
@@ -360,6 +534,32 @@ export default function RechnerWizard() {
                 <div className="absolute right-1 top-0 w-[56%] rotate-3 overflow-hidden rounded-2xl shadow-2xl ring-1 ring-slate-900/5 transition-transform duration-300 hover:-translate-y-1">
                   <Image src="/images/Dankeseite-1.png" alt="" width={1200} height={675} className="h-auto w-full" />
                 </div>
+              </div>
+
+              {/* Das erwartet dich im Gespräch */}
+              <div className="mt-10 rounded-2xl border border-blue-100 bg-blue-50/70 p-6 text-left">
+                <h4 className="text-base font-bold text-slate-900 sm:text-lg">Das erwartet dich im Gespräch:</h4>
+                <ul className="mt-4 space-y-3">
+                  {DANKE_VORTEILE.map((v) => (
+                    <li key={v} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                        <svg className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
+                      {v}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mx-auto mt-8 max-w-lg space-y-3 text-sm leading-relaxed text-slate-600">
+                <p>
+                  Die meisten Unternehmer kennen ihren tatsächlichen Firmenwert nicht – obwohl er häufig den größten Teil ihres Vermögens ausmacht.
+                </p>
+                <p>
+                  Wer die richtigen Hebel kennt, kann seinen Unternehmenswert oft deutlich steigern, lange bevor ein Verkauf überhaupt geplant ist.
+                </p>
+                <p>Wir freuen uns auf das Gespräch mit dir.</p>
+                <p className="font-semibold text-slate-900">Dein Team von der Otter Consult</p>
               </div>
 
               <button
