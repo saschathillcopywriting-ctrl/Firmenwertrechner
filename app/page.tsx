@@ -149,10 +149,10 @@ function AblaufSchritte() {
   return (
     <div className="relative mx-auto mt-16 max-w-3xl">
       {/* Verbindungslinie + Fortschritt */}
-      <div aria-hidden className="absolute bottom-8 left-8 top-8 w-px bg-slate-200 sm:left-10" />
+      <div aria-hidden className="absolute bottom-8 left-8 top-8 w-px bg-white/10 sm:left-10" />
       <div
         aria-hidden
-        className="absolute left-8 top-8 w-px bg-gradient-to-b from-blue-500 to-blue-600 transition-all duration-700 ease-out sm:left-10"
+        className="absolute left-8 top-8 w-px bg-gradient-to-b from-blue-400 to-blue-600 transition-all duration-700 ease-out sm:left-10"
         style={{ height: `calc((100% - 4rem) * ${(aktiv + 1) / SCHRITTE_HOW.length})` }}
       />
 
@@ -164,20 +164,20 @@ function AblaufSchritte() {
               key={s.titel}
               ref={(el) => { refs.current[i] = el; }}
               data-index={i}
-              className={`relative flex items-start gap-5 transition-all duration-500 sm:gap-8 ${on ? "opacity-100" : "opacity-40"}`}
+              className={`relative flex items-start gap-5 transition-all duration-500 sm:gap-8 ${on ? "opacity-100" : "opacity-45"}`}
             >
               <div
                 className={`relative z-10 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl text-2xl font-bold transition-all duration-500 sm:h-20 sm:w-20 ${
                   on
                     ? "scale-105 bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-xl shadow-blue-600/40"
-                    : "bg-white text-slate-400 ring-1 ring-slate-200"
+                    : "bg-white/5 text-slate-400 ring-1 ring-white/10"
                 }`}
               >
                 {i + 1}
               </div>
-              <div className={`flex-1 rounded-2xl p-5 transition-all duration-500 sm:p-7 ${on ? "bg-white shadow-xl shadow-slate-900/5 ring-1 ring-blue-100" : ""}`}>
-                <h3 className={`text-xl font-bold transition-colors duration-500 sm:text-2xl ${on ? "text-slate-900" : "text-slate-500"}`}>{s.titel}</h3>
-                <p className="mt-2 leading-relaxed text-slate-600">{s.text}</p>
+              <div className={`flex-1 rounded-2xl p-5 transition-all duration-500 sm:p-7 ${on ? "bg-white/[0.07] shadow-xl shadow-black/30 ring-1 ring-blue-400/25 backdrop-blur-sm" : ""}`}>
+                <h3 className={`text-xl font-bold transition-colors duration-500 sm:text-2xl ${on ? "text-white" : "text-slate-300"}`}>{s.titel}</h3>
+                <p className="mt-2 leading-relaxed text-slate-300">{s.text}</p>
               </div>
             </div>
           );
@@ -306,16 +306,16 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 2 – WARUM (4 Gründe)                                */}
       {/* ============================================================ */}
-      <section id="warum" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-white to-slate-50 py-20 sm:py-28">
-        {/* dezente Struktur */}
+      <section id="warum" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-slate-50 via-blue-50/50 to-slate-50 py-20 sm:py-28">
+        {/* Grid + Glow */}
         <div aria-hidden className="pointer-events-none absolute inset-0" style={{
-          backgroundImage: "radial-gradient(rgba(37,99,235,0.07) 1px, transparent 1px)",
-          backgroundSize: "26px 26px",
-          maskImage: "radial-gradient(ellipse 85% 75% at 50% 35%, black, transparent)",
-          WebkitMaskImage: "radial-gradient(ellipse 85% 75% at 50% 35%, black, transparent)",
+          backgroundImage: "linear-gradient(to right, rgba(37,99,235,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(37,99,235,0.05) 1px, transparent 1px)",
+          backgroundSize: "46px 46px",
+          maskImage: "radial-gradient(ellipse 90% 80% at 50% 30%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 90% 80% at 50% 30%, black, transparent)",
         }} />
-        <div aria-hidden className="pointer-events-none absolute -left-24 top-24 h-80 w-80 rounded-full bg-blue-100/50 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -right-24 bottom-10 h-80 w-80 rounded-full bg-sky-100/40 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-blue-200/40 blur-[120px]" />
+        <div aria-hidden className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-200/40 blur-[120px]" />
 
         <div className="relative mx-auto max-w-6xl px-4">
           <div className="mx-auto max-w-3xl text-center">
@@ -326,8 +326,8 @@ export default function LandingPage() {
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2">
             {VORTEILE.map((v) => (
-              <div key={v.titel} className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-white to-blue-50/60 p-8 shadow-md shadow-slate-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/10">
-                <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-100/50 transition-all duration-500 group-hover:scale-[2.2] group-hover:bg-blue-100/70" />
+              <div key={v.titel} className="group relative overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-white via-blue-50/40 to-blue-100/50 p-8 shadow-lg shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-900/15">
+                <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-200/40 transition-all duration-500 group-hover:scale-[2.2] group-hover:bg-blue-200/60" />
                 <div className="relative">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-600/30 transition-transform duration-300 group-hover:scale-105">
                     {v.icon}
@@ -344,14 +344,21 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 3 – SO FUNKTIONIERT'S (3 Schritte)                  */}
       {/* ============================================================ */}
-      <section id="ablauf" className="scroll-mt-24 bg-slate-50 py-20 sm:py-28">
-        <div className="mx-auto max-w-5xl px-4">
+      <section id="ablauf" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20 sm:py-28">
+        <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[760px] max-w-[120%] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[140px]" />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{
+          backgroundImage: "linear-gradient(to right, rgba(148,163,184,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.06) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+          maskImage: "radial-gradient(ellipse 75% 60% at 50% 35%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 75% 60% at 50% 35%, black, transparent)",
+        }} />
+        <div className="relative mx-auto max-w-5xl px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-600">So funktioniert&apos;s</span>
-            <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
+            <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-400">So funktioniert&apos;s</span>
+            <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
               In nur 3 Schritten zu deinem individuellen Firmenwert
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
               Unser Rechner nutzt das Verfahren, das auch im professionellen Firmenverkauf der Standard ist:
               das Multiplikator-Verfahren. Dein Wert ergibt sich dabei nicht aus einer Zufallszahl, sondern
               aus realen Marktdaten.
@@ -360,7 +367,7 @@ export default function LandingPage() {
 
           <AblaufSchritte />
 
-          <p className="mx-auto mt-14 max-w-2xl text-center leading-relaxed text-slate-600">
+          <p className="mx-auto mt-14 max-w-2xl text-center leading-relaxed text-slate-300">
             So bekommst du in nur wenigen Minuten eine fundierte erste Orientierung ganz ohne
             Terminunterlagen oder Kosten.
           </p>
@@ -375,14 +382,14 @@ export default function LandingPage() {
       {/* ============================================================ */}
       <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white py-20 sm:py-28">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <Image src="/images/Fabian-Otter-Frau.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.07]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white" />
+          <Image src="/images/Fabian-Otter-Frau.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.11]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/70 to-white" />
         </div>
 
         <div className="relative mx-auto max-w-3xl px-4">
           <div className="text-center">
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-              Bevor du loslegst: Das Wichtigste in Kürze
+              Bevor du loslegst, das Wichtigste in Kürze:
             </h2>
           </div>
 
@@ -393,7 +400,7 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <CtaButton onClick={zumRechner} variant="dark" />
+            <CtaButton onClick={zumRechner} variant="primary" />
           </div>
         </div>
       </section>
