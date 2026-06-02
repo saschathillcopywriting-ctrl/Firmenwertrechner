@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Firmenwertrechner",
-  description: "Berechnen Sie den Wert Ihres Unternehmens in wenigen Schritten.",
+  title: "Firmenwert berechnen – kostenlose Ersteinschätzung | Firmenwertrechner",
+  description:
+    "Berechne in wenigen Minuten kostenlos den Wert deines Unternehmens – basierend auf aktuellen Marktwerten und dem Multiplikator-Verfahren, das auch Käufer und Berater nutzen.",
 };
 
 export default function RootLayout({
