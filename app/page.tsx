@@ -380,10 +380,10 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 4 – FAQ (mit Bild-Wasserzeichen)                    */}
       {/* ============================================================ */}
-      <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white py-20 sm:py-28">
+      <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-slate-100 py-20 sm:py-28">
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-          <Image src="/images/Fabian-Otter-Frau.png" alt="" fill sizes="100vw" className="scale-125 object-cover object-center opacity-40 blur-[2px] contrast-125" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+          <Image src="/images/Fabian-Otter-Frau.png" alt="" fill sizes="100vw" className="scale-150 object-cover object-center opacity-[0.55] blur-[2px] contrast-125" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-100 via-transparent to-slate-100" />
         </div>
 
         <div className="relative mx-auto max-w-3xl px-4">
