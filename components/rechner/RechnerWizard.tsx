@@ -538,7 +538,7 @@ export default function RechnerWizard() {
                 </ul>
               </div>
 
-              <div className="mt-8 space-y-3 text-left text-sm leading-relaxed text-slate-600">
+              <div className="mx-auto mt-8 max-w-lg space-y-3 text-sm leading-relaxed text-slate-600">
                 <p>
                   Nach diesem unverbindlichen Gespräch weißt du ganz transparent, was deine Firma heute wert ist und an welchen Stellschrauben du drehen kannst, um den Wert in den nächsten Jahren deutlich zu steigern.
                 </p>

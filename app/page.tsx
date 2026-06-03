@@ -321,19 +321,8 @@ export default function LandingPage() {
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               4 Gründe, warum du auch{" "}
-              <span className="relative inline-block whitespace-nowrap text-blue-600">
-                ohne Verkaufsabsicht
-                <svg
-                  aria-hidden
-                  viewBox="0 0 320 16"
-                  preserveAspectRatio="none"
-                  fill="none"
-                  className="pointer-events-none absolute -bottom-1 left-0 h-[0.55em] w-full text-blue-400"
-                >
-                  <path d="M5 11C72 5 150 4 222 7c38 2 70 3 93 -1" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-                </svg>
-              </span>{" "}
-              den Wert deiner Firma kennen solltest
+              <span className="whitespace-nowrap text-blue-600">ohne Verkaufsabsicht</span>{" "}
+              den Wert deiner Firma kennen solltest:
             </h2>
           </div>
 
