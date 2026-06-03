@@ -471,7 +471,7 @@ export default function RechnerWizard() {
                     <span className="font-normal text-gray-400">(optional)</span>
                   </label>
                   <textarea
-                    rows={3}
+                    rows={1}
                     value={anmerkung}
                     onChange={(e) => setAnmerkung(e.target.value)}
                     className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-colors hover:border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -510,7 +510,7 @@ export default function RechnerWizard() {
                 Deine Anfrage wurde erfolgreich übermittelt.
               </h3>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-600">
-                Einer unserer Experten wird sich innerhalb der nächsten 24 bis 48 Stunden persönlich bei dir melden.
+                Ein Experte aus dem Team der Otter Consult wird sich innerhalb der nächsten 24 bis 48 Stunden persönlich bei dir melden.
               </p>
 
               {/* Dekorative Bilder: leicht überlappend & versetzt */}
@@ -538,17 +538,13 @@ export default function RechnerWizard() {
                 </ul>
               </div>
 
-              <div className="mx-auto mt-8 max-w-lg space-y-3 text-sm leading-relaxed text-slate-600">
+              <div className="mt-8 space-y-3 text-left text-sm leading-relaxed text-slate-600">
+                <p>
+                  Nach diesem unverbindlichen Gespräch weißt du ganz transparent, was deine Firma heute wert ist und an welchen Stellschrauben du drehen kannst, um den Wert in den nächsten Jahren deutlich zu steigern.
+                </p>
                 <p>Wir freuen uns auf das Gespräch mit dir.</p>
                 <p className="font-semibold text-slate-900">Dein Team von der Otter Consult</p>
               </div>
-
-              <button
-                onClick={neuStarten}
-                className="mt-10 text-sm text-slate-400 underline-offset-2 transition-colors hover:text-slate-600 hover:underline"
-              >
-                Neue Berechnung starten
-              </button>
             </div>
           )}
         </div>

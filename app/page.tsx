@@ -79,11 +79,11 @@ const SCHRITTE_HOW: { titel: string; text: string }[] = [
 
 const FAQS: { frage: string; antwort: string }[] = [
   { frage: "Ist die Wertermittlung wirklich kostenlos?", antwort: "Ja, zu 100 %. Du gibst deine Eckdaten ein und erhältst sofort eine erste Einschätzung – ohne Kosten und Verpflichtung." },
-  { frage: "Wie genau ist das Ergebnis?", antwort: "Der Rechner liefert eine fundierte erste Orientierung auf Basis aktueller Marktwerte und des anerkannten Multiplikator-Verfahrens. Du bekommst eine realistische Spanne, in der dein Firmenwert aktuell liegt – ideal, um ein belastbares Gefühl für die Größenordnung zu bekommen." },
+  { frage: "Wie genau ist das Ergebnis?", antwort: "Der Rechner liefert eine fundierte erste Orientierung auf Basis aktueller Marktwerte und des anerkannten Multiplikator-Verfahrens. Du bekommst eine realistische Spanne, in der dein Firmenwert aktuell liegt. Ideal, um ein belastbares Gefühl für die Größenordnung zu bekommen." },
   { frage: "Was passiert mit meinen Daten?", antwort: "Deine Angaben werden vertraulich behandelt und nicht an Dritte weitergegeben. Sie dienen ausschließlich dazu, deinen Firmenwert zu ermitteln." },
   { frage: "Muss ich meine Firma verkaufen wollen?", antwort: "Nein. Viele nutzen den Rechner einfach, um zu wissen, wo sie stehen, ganz ohne konkrete Verkaufsabsicht. Gerade wer erst in einigen Jahren verkaufen möchte, profitiert davon, seinen Wert früh zu kennen." },
   { frage: "Welche Daten brauche ich für die Berechnung?", antwort: "Die Basis bilden deine Branche, dein Jahresumsatz und dein Gewinn. Dazu kommen ein paar Fragen zu Faktoren wie Inhaberabhängigkeit oder wiederkehrenden Umsätzen, die den Wert mitbestimmen. Das sind alles Zahlen, die du als Unternehmer im Kopf oder griffbereit hast – aufwändige Unterlagen brauchst du nicht." },
-  { frage: "Wie lange dauert es?", antwort: "In der Regel unter fünf Minuten. Du klickst dich durch ein paar Schritte und erhältst am Ende direkt dein Ergebnis." },
+  { frage: "Wie lange dauert es?", antwort: "In der Regel unter 5 Minuten. Du klickst dich durch ein paar Schritte und erhältst am Ende direkt dein Ergebnis." },
 ];
 
 const TRUST = ["100 % kostenlos & unverbindlich", "In wenigen Minuten erledigt", "Basierend auf echten Marktwerten"];
@@ -197,8 +197,8 @@ export default function LandingPage() {
   const zumRechner = () => scrollToId("rechner");
 
   const NAV = [
-    { label: "Warum Firmenwert ermitteln", id: "warum" },
-    { label: "Wie funktioniert es", id: "ablauf" },
+    { label: "Warum Firmenwert ermitteln?", id: "warum" },
+    { label: "So funktioniert's", id: "ablauf" },
     { label: "Fragen & Antworten", id: "faq" },
   ];
 
@@ -318,9 +318,22 @@ export default function LandingPage() {
         <div aria-hidden className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-200/40 blur-[120px]" />
 
         <div className="relative mx-auto max-w-6xl px-4">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-              4 Gründe, warum du auch ohne Verkaufsabsicht den Wert deiner Firma kennen solltest
+              4 Gründe, warum du auch{" "}
+              <span className="relative inline-block whitespace-nowrap text-blue-600">
+                ohne Verkaufsabsicht
+                <svg
+                  aria-hidden
+                  viewBox="0 0 320 16"
+                  preserveAspectRatio="none"
+                  fill="none"
+                  className="pointer-events-none absolute -bottom-1 left-0 h-[0.55em] w-full text-blue-400"
+                >
+                  <path d="M5 11C72 5 150 4 222 7c38 2 70 3 93 -1" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+                </svg>
+              </span>{" "}
+              den Wert deiner Firma kennen solltest
             </h2>
           </div>
 
