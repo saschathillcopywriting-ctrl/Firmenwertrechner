@@ -5,7 +5,6 @@ import Image from "next/image";
 import { FormFeld } from "@/components/ui/FormFeld";
 import { AuswahlFeld } from "@/components/ui/AuswahlFeld";
 import NavButtons from "@/components/ui/NavButtons";
-import AuswahlKacheln from "@/components/ui/AuswahlKacheln";
 import { useFormularStore } from "@/store/formular-store";
 import {
   BRANCHEN,
@@ -48,17 +47,6 @@ const FUNNEL_FRAGEN = [
       "Sonstiges",
     ],
   },
-  {
-    key: "aussage",
-    frage: "Welche Aussage trifft aktuell am ehesten auf dein Unternehmen zu?",
-    antworten: [
-      "Stark wachsend",
-      "Stabil etabliert",
-      "Wachstum möglich, aber ausbaufähig",
-      "Hohe Inhaberabhängigkeit",
-      "Nachfolge bereits in Planung",
-    ],
-  },
 ];
 
 const GESPRAECH_VORTEILE = [
@@ -74,7 +62,7 @@ const DANKE_VORTEILE = [
   "Eine Einordnung deines Unternehmenswertes anhand deiner individuellen Situation",
   "Hinweise auf Werttreiber und mögliche Risiken in deinem Unternehmen",
   "Erste Empfehlungen, wie sich der Firmenwert häufig steigern lässt",
-  "Antworten auf deine Fragen zu Nachfolge, Verkauf oder Unternehmensentwicklung",
+  "Antworten auf deine Fragen zu Nachfolge, Verkauf oder Unternehmensentwicklung sowie Antworten auf alle deine Fragen.",
 ];
 
 /* --- Zahlen-Helfer: Anzeige formatiert, Speicherung als reine Ziffern --- */
@@ -403,19 +391,18 @@ export default function RechnerWizard() {
               <div className="mt-8 space-y-5">
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-6">
                   <p className="text-sm leading-relaxed text-slate-700">
-                    Dieser Wert basiert auf deinen Angaben und den aktuellen Marktwerten deiner Branche.
-                    Der tatsächliche Verkaufspreis wird von vielen weiteren Faktoren beeinflusst – genau
-                    hier entstehen oft die größten Potenziale.
+                    Dieser Wert basiert auf deinen Angaben und den aktuellen Marktwerten deiner Branche. Er liefert dir eine erste Orientierung darüber, was dein Unternehmen heute wert sein könnte.
                   </p>
                   <p className="mt-3 text-sm leading-relaxed text-slate-700">
-                    In einem kostenlosen, unverbindlichen Gespräch analysieren wir gemeinsam deine
-                    individuelle Situation und zeigen dir, welchen Wert dein Unternehmen realistisch
-                    erzielen kann.
+                    Der tatsächliche Verkaufspreis wird jedoch von vielen weiteren Faktoren beeinflusst. Genau hier entstehen häufig die größten Unterschiede und oft auch die größten Potenziale.
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                    In einem kostenlosen und unverbindlichen Gespräch analysieren wir gemeinsam deine individuelle Situation. Du erfährst, welchen Wert dein Unternehmen realistisch erzielen kann und welche Maßnahmen den Unternehmenswert oft schon innerhalb kurzer Zeit deutlich steigern können.
                   </p>
 
                   <button
                     onClick={() => gehZu("funnel1")}
-                    className="mt-5 w-full rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-blue-600/30 transition-colors hover:bg-blue-700"
+                    className="mt-5 -mx-5 w-[calc(100%_+_2.5rem)] rounded-xl bg-blue-600 px-5 py-4 text-base font-semibold text-white shadow-lg shadow-blue-600/30 transition-colors hover:bg-blue-700"
                   >
                     Jetzt kostenloses Beratungsgespräch vereinbaren
                   </button>
@@ -466,14 +453,14 @@ export default function RechnerWizard() {
 
               <div className="space-y-7 border-t border-slate-100 pt-7">
                 {FUNNEL_FRAGEN.map((f) => (
-                  <AuswahlKacheln
+                  <AuswahlFeld
                     key={f.key}
                     label={f.frage}
                     pflicht
-                    spalten={2}
                     optionen={f.antworten.map((a) => ({ wert: a, label: a }))}
-                    wert={funnelAntworten[f.key] ?? ""}
-                    onChange={(w) => { setFunnelAntworten((p) => ({ ...p, [f.key]: w })); clear(f.key); }}
+                    platzhalter="Bitte wählen"
+                    value={funnelAntworten[f.key] ?? ""}
+                    onChange={(e) => { setFunnelAntworten((p) => ({ ...p, [f.key]: e.target.value })); clear(f.key); }}
                     fehler={fehler[f.key]}
                   />
                 ))}
@@ -552,12 +539,6 @@ export default function RechnerWizard() {
               </div>
 
               <div className="mx-auto mt-8 max-w-lg space-y-3 text-sm leading-relaxed text-slate-600">
-                <p>
-                  Die meisten Unternehmer kennen ihren tatsächlichen Firmenwert nicht – obwohl er häufig den größten Teil ihres Vermögens ausmacht.
-                </p>
-                <p>
-                  Wer die richtigen Hebel kennt, kann seinen Unternehmenswert oft deutlich steigern, lange bevor ein Verkauf überhaupt geplant ist.
-                </p>
                 <p>Wir freuen uns auf das Gespräch mit dir.</p>
                 <p className="font-semibold text-slate-900">Dein Team von der Otter Consult</p>
               </div>
