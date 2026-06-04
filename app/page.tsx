@@ -39,8 +39,8 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
       </svg>
     ),
-    titel: "Klarheit über dein größtes Asset",
-    text: "Für die meisten Unternehmer steckt ein Großteil ihres Vermögens in der eigenen Firma. Zu wissen, was sie wert ist, ist die Grundlage für jede größere Entscheidung – von der Altersvorsorge bis zur Nachfolge.",
+    titel: "Klarheit über dein größtes Asset.",
+    text: "Für die meisten Unternehmer steckt ein Großteil ihres Vermögens in der eigenen Firma. Trotzdem kennen viele den eigenen Unternehmenswert nicht. Dabei ist genau dieser Wert die Grundlage für wichtige Entscheidungen – von der Altersvorsorge bis zur Nachfolge. Der eigenentwickelte KMU-Firmenwertrechner von der Otter Consult liefert dafür eine erste realistische Orientierung auf der Basis von Hunderten Unternehmensverkäufen im Mittelstand.",
   },
   {
     icon: (
@@ -48,8 +48,8 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
       </svg>
     ),
-    titel: "Vorbereitet sein, bevor es ernst wird",
-    text: "Ein Angebot kommt oft schneller, als man denkt. Durch einen Wettbewerber, einen Investor oder einen Nachfolger. Wer seinen Wert kennt, kann einschätzen, ob eine Zahl fair ist, statt aus dem Bauch heraus zu entscheiden.",
+    titel: "Vorbereitet sein, bevor es ernst wird.",
+    text: "Ein Angebot kommt oft schneller, als man denkt. Durch einen Wettbewerber, einen Investor oder einen Nachfolger. Wer seinen Unternehmenswert kennt, kann einschätzen, ob eine Zahl fair ist, statt aus dem Bauch heraus zu entscheiden. Der KMU-Firmenwertrechner basiert dabei auf einer eigenen Datenbank von realen Transaktionen und liefert dir eine fundierte erste Orientierung, bevor konkrete Verhandlungen überhaupt beginnen.",
   },
   {
     icon: (
@@ -57,8 +57,8 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.306a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.281m5.94 2.28l-2.28 5.941" />
       </svg>
     ),
-    titel: "Hebel zur Wertsteigerung erkennen",
-    text: "Der Firmenwert ist kein Schicksal. Faktoren wie Inhaberabhängigkeit, wiederkehrende Umsätze oder Kundenstruktur lassen sich gezielt verbessern. Aber nur, wenn du früh genug weißt, wo du stehst.",
+    titel: "Hebel zur Wertsteigerung erkennen.",
+    text: "Der Firmenwert ist kein Schicksal. Faktoren wie Inhaberabhängigkeit, wiederkehrende Umsätze oder Kundenstruktur lassen sich gezielt verbessern und den Firmenwert steigern. Genau diese und weitere Faktoren fließen auch in die Bewertung des KMU-Firmenwertrechners ein und helfen dir dabei, zu erkennen, mit welchen Stellschrauben du den Wert deines Unternehmens erhöhen kannst.",
   },
   {
     icon: (
@@ -66,27 +66,28 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
       </svg>
     ),
-    titel: "Realistische Erwartung statt Wunschdenken",
-    text: "Manche unterschätzen ihre Firma, andere überschätzen sie massiv. Eine erste belastbare Einschätzung holt dich auf den Boden der Tatsachen – in beide Richtungen.",
+    titel: "Realistische Erwartung statt Wunschdenken.",
+    text: "Manche Unternehmer unterschätzen ihre Firma, andere überschätzen sie massiv. Beides kann später zu teuren Fehlentscheidungen führen. Viele Firmenwertrechner arbeiten mit pauschalen Multiplikatoren oder theoretischen Standardwerten. Der KMU-Firmenwertrechner von Otter Consult orientiert sich dagegen an realen Zahlen der letzten Jahre und hilft dir dabei, den Wert deines Unternehmens deutlich realistischer einzuordnen.",
   },
 ];
 
 const SCHRITTE_HOW: { titel: string; text: string }[] = [
-  { titel: "Eckdaten eingeben", text: "Du trägst Branche, Umsatz und Gewinn ein und beantwortest ein paar kurze Fragen zu deinem Unternehmen. Das Ganze dauert nur wenige Minuten." },
-  { titel: "Marktwerte anwenden", text: "Dein Gewinn wird mit dem aktuellen Branchenfaktor multipliziert. Dazu kommen Faktoren, die deinen Wert nach oben oder unten ziehen – zum Beispiel, wie unabhängig dein Betrieb von dir läuft." },
-  { titel: "Dein individuelles Ergebnis", text: "Du siehst sofort eine realistische Spanne, in der dein Firmenwert aktuell liegt. Kostenlos und direkt auf der Seite." },
+  { titel: "Eckdaten eingeben.", text: "Du trägst deine Branche, Umsatz und Gewinn ein und beantwortest ein paar kurze Fragen zu deinem Unternehmen. Das Ganze dauert nur wenige Minuten." },
+  { titel: "Praxisdaten statt Standardwerte.", text: "Neben deinen Unternehmenszahlen berücksichtigt der Rechner Faktoren, die auch in realen Verkaufsprozessen eine wichtige Rolle spielen – zum Beispiel Inhaberabhängigkeit, Kundenstruktur oder wiederkehrende Umsätze." },
+  { titel: "Dein individuelles Ergebnis.", text: "Du erhältst sofort auf der Seite eine realistische erste Einschätzung deines Firmenwerts – basierend auf Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand." },
 ];
 
 const FAQS: { frage: string; antwort: string }[] = [
   { frage: "Ist die Wertermittlung wirklich kostenlos?", antwort: "Ja, zu 100 %. Du gibst deine Eckdaten ein und erhältst sofort eine erste Einschätzung – ohne Kosten und Verpflichtung." },
-  { frage: "Wie genau ist das Ergebnis?", antwort: "Der Rechner liefert eine fundierte erste Orientierung auf Basis aktueller Marktwerte und des anerkannten Multiplikator-Verfahrens. Du bekommst eine realistische Spanne, in der dein Firmenwert aktuell liegt. Ideal, um ein belastbares Gefühl für die Größenordnung zu bekommen." },
+  { frage: "Wie genau ist das Ergebnis?", antwort: "Der KMU-Firmenwertrechner von der Otter Consult wurde auf Basis einer eigenen Datenbank sowie der Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand entwickelt. Statt auf pauschale Multiplikatoren oder theoretische Standardwerte zu setzen, basiert die Einschätzung auf Erkenntnissen aus realen Transaktionen und tatsächlich erzielten Verkaufspreisen. Dadurch erhältst du eine deutlich praxisnähere Orientierung als bei vielen klassischen Firmenwertrechnern." },
+  { frage: "Ich habe meinen Firmenwert bereits mit einem anderen Rechner ermittelt. Lohnt sich das trotzdem?", antwort: "Ja. Viele Firmenwertrechner arbeiten mit pauschalen Multiplikatoren und allgemeinen Annahmen. Der KMU-Firmenwertrechner von der Otter Consult basiert dagegen auf einer eigenen Datenbank sowie den Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand. Dadurch erhältst du eine zweite Einschätzung auf Basis realer Transaktionen und kannst besser beurteilen, welcher Firmenwert am Markt tatsächlich durchsetzbar sein könnte." },
   { frage: "Was passiert mit meinen Daten?", antwort: "Deine Angaben werden vertraulich behandelt und nicht an Dritte weitergegeben. Sie dienen ausschließlich dazu, deinen Firmenwert zu ermitteln." },
   { frage: "Muss ich meine Firma verkaufen wollen?", antwort: "Nein. Viele nutzen den Rechner einfach, um zu wissen, wo sie stehen, ganz ohne konkrete Verkaufsabsicht. Gerade wer erst in einigen Jahren verkaufen möchte, profitiert davon, seinen Wert früh zu kennen." },
   { frage: "Welche Daten brauche ich für die Berechnung?", antwort: "Die Basis bilden deine Branche, dein Jahresumsatz und dein Gewinn. Dazu kommen ein paar Fragen zu Faktoren wie Inhaberabhängigkeit oder wiederkehrenden Umsätzen, die den Wert mitbestimmen. Das sind alles Zahlen, die du als Unternehmer im Kopf oder griffbereit hast – aufwändige Unterlagen brauchst du nicht." },
-  { frage: "Wie lange dauert es?", antwort: "In der Regel unter 5 Minuten. Du klickst dich durch ein paar Schritte und erhältst am Ende direkt dein Ergebnis." },
+  { frage: "Wie lange dauert es?", antwort: "In der Regel nicht länger als 3 Minuten. Du klickst dich durch ein paar Schritte und erhältst am Ende direkt dein Ergebnis." },
 ];
 
-const TRUST = ["100 % kostenlos & unverbindlich", "In wenigen Minuten erledigt", "Basierend auf echten Marktwerten"];
+const TRUST = ["100 % kostenlos & unverbindlich", "In 3 Minuten erledigt", "Entwickelt auf Basis Hunderter Transaktionen im Mittelstand"];
 
 /* ------------------------------------------------------------------ */
 /*  FAQ-Item                                                           */
@@ -240,16 +241,15 @@ export default function LandingPage() {
 
         <div className="relative mx-auto max-w-5xl px-4 pt-12 text-center sm:pt-16">
           <p className="text-sm font-semibold tracking-wide text-blue-300 sm:text-base">
-            Für Unternehmer, die ihr Lebenswerk nicht dem Zufall überlassen wollen
+            Der KMU-Firmenwertrechner – von Mittelständlern für Mittelständler entwickelt
           </p>
           <h1 className="mx-auto mt-4 max-w-5xl text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
             Was würde ein Käufer heute für deine Firma{" "}
             <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">wirklich zahlen?</span>
           </h1>
           <p className="mx-auto mt-5 max-w-4xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            Gib ein paar Eckdaten zu deinem Unternehmen ein und erhalte sofort eine erste Einschätzung
-            deines Firmenwerts – basierend auf aktuellen Marktwerten und dem Verfahren, das auch Käufer
-            und Berater nutzen.
+            Gib ein paar Eckdaten zu deinem Unternehmen an und erhalte sofort eine erste Einschätzung
+            deines Firmenwerts – basierend auf Hunderten Unternehmensverkäufen im Mittelstand.
           </p>
         </div>
 
@@ -320,9 +320,9 @@ export default function LandingPage() {
         <div className="relative mx-auto max-w-6xl px-4">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-              4 Gründe, warum du auch{" "}
-              <span className="whitespace-nowrap text-blue-600">ohne Verkaufsabsicht</span>{" "}
-              den Wert deiner Firma kennen solltest:
+              4 Gründe, warum Mittelständler den eigenentwickelten{" "}
+              <span className="whitespace-nowrap text-blue-600">KMU-Firmenwertrechner</span>{" "}
+              von der Otter Consult nutzen sollten:
             </h2>
           </div>
 
@@ -339,6 +339,15 @@ export default function LandingPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mx-auto mt-14 max-w-3xl space-y-4 text-center leading-relaxed text-slate-600">
+            <p>
+              Die meisten Unternehmer kennen den Wert ihrer Firma nicht, obwohl genau dieser Wert oft den größten Teil ihres Vermögens ausmacht.
+            </p>
+            <p>
+              Genau deshalb wurde der KMU-Firmenwertrechner von der Otter Consult entwickelt. Basierend auf einer eigenen Datenbank sowie den Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand liefert er dir in 3 Minuten eine fundierte erste Orientierung über den möglichen Wert deines Unternehmens.
+            </p>
           </div>
         </div>
       </section>
@@ -358,20 +367,22 @@ export default function LandingPage() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-400">So funktioniert&apos;s</span>
             <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-              In nur 3 Schritten zu deinem individuellen Firmenwert
+              In nur 3 Schritten zu deinem individuellen Firmenwert mit DEM KMU-Firmenwertrechner für den Mittelstand
             </h2>
             <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
-              Unser Rechner nutzt das Verfahren, das auch im professionellen Firmenverkauf der Standard ist:
-              das Multiplikator-Verfahren. Dein Wert ergibt sich dabei nicht aus einer Zufallszahl, sondern
-              aus realen Marktdaten.
+              Der KMU-Firmenwertrechner von der Otter Consult basiert auf den Erfahrungen aus Hunderten
+              Unternehmensverkäufen im Mittelstand sowie auf einer umfangreichen Datenbank realer
+              Transaktionen. Dadurch orientiert sich die Bewertung nicht an pauschalen Standardwerten oder
+              theoretischen Modellrechnungen, sondern an Erkenntnissen aus echten Unternehmensverkäufen, die
+              tatsächlich am Markt stattgefunden haben.
             </p>
           </div>
 
           <AblaufSchritte />
 
           <p className="mx-auto mt-14 max-w-2xl text-center leading-relaxed text-slate-300">
-            So bekommst du in nur wenigen Minuten eine fundierte erste Orientierung ganz ohne
-            Terminunterlagen oder Kosten.
+            In weniger als 5 Minuten erhältst du eine fundierte erste Orientierung darüber, was dein
+            Unternehmen heute wert sein könnte – kostenlos, unverbindlich und ohne aufwändige Unterlagen.
           </p>
           <div className="mt-8 flex justify-center">
             <CtaButton onClick={zumRechner} variant="primary" />
@@ -391,7 +402,7 @@ export default function LandingPage() {
         <div className="relative mx-auto max-w-3xl px-4">
           <div className="text-center">
             <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-              Bevor du loslegst, das Wichtigste in Kürze:
+              Bevor du loslegst, das Wichtigste in Kürze
             </h2>
           </div>
 
