@@ -115,7 +115,7 @@ function FaqItem({ frage, antwort, offen, onToggle }: { frage: string; antwort: 
 /* ------------------------------------------------------------------ */
 function CtaButton({ onClick, variant = "primary", className = "", arrow = true }: { onClick: () => void; variant?: "primary" | "dark" | "light"; className?: string; arrow?: boolean }) {
   const styles = {
-    primary: "bg-blue-600 text-white shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:shadow-blue-600/40",
+    primary: "bg-blue-600 text-white shadow-sm hover:bg-blue-700",
     dark: "bg-slate-900 text-white shadow-lg hover:bg-slate-800",
     light: "bg-white text-slate-900 shadow-lg hover:bg-slate-100",
   }[variant];
@@ -170,13 +170,13 @@ function AblaufSchritte() {
               <div
                 className={`relative z-10 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl text-2xl font-bold transition-all duration-500 sm:h-20 sm:w-20 ${
                   on
-                    ? "scale-105 bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-xl shadow-blue-600/40"
+                    ? "scale-105 bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-950/40"
                     : "bg-white/5 text-slate-400 ring-1 ring-white/10"
                 }`}
               >
                 {i + 1}
               </div>
-              <div className={`flex-1 rounded-2xl p-5 transition-all duration-500 sm:p-7 ${on ? "bg-white/[0.07] shadow-xl shadow-black/30 ring-1 ring-blue-400/25 backdrop-blur-sm" : ""}`}>
+              <div className={`flex-1 rounded-2xl p-5 transition-all duration-500 sm:p-7 ${on ? "bg-white/[0.06] shadow-xl shadow-black/20 ring-1 ring-white/10 backdrop-blur-sm" : ""}`}>
                 <h3 className={`text-xl font-bold transition-colors duration-500 sm:text-2xl ${on ? "text-white" : "text-slate-300"}`}>{s.titel}</h3>
                 <p className="mt-2 leading-relaxed text-slate-300">{s.text}</p>
               </div>
@@ -204,7 +204,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="font-sans bg-slate-950">
+    <div className="font-sans bg-[#0d2137]">
       {/* ============================================================ */}
       {/*  HEADER                                                      */}
       {/* ============================================================ */}
@@ -220,7 +220,7 @@ export default function LandingPage() {
               </button>
             ))}
           </nav>
-          <button type="button" onClick={zumRechner} className="flex-shrink-0 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:bg-blue-700 hover:shadow-blue-600/40 sm:px-6 sm:py-3 sm:text-base">
+          <button type="button" onClick={zumRechner} className="flex-shrink-0 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-blue-700 sm:px-6 sm:py-3 sm:text-base">
             Jetzt Firmenwert ermitteln
           </button>
         </div>
@@ -229,21 +229,15 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 1 – HERO                                            */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden bg-slate-950">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
-        <div aria-hidden className="pointer-events-none absolute left-1/2 top-[-12%] h-[560px] w-[900px] max-w-[130%] -translate-x-1/2 rounded-full bg-blue-600/25 blur-[140px]" />
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{
-          backgroundImage: "linear-gradient(to right, rgba(148,163,184,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.06) 1px, transparent 1px)",
-          backgroundSize: "52px 52px",
-          maskImage: "radial-gradient(ellipse 75% 60% at 50% 30%, black, transparent)",
-          WebkitMaskImage: "radial-gradient(ellipse 75% 60% at 50% 30%, black, transparent)",
-        }} />
+      <section className="relative overflow-hidden bg-[#0d2137]">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0e2846] via-[#0b1d33] to-[#0d2137]" />
+        <div aria-hidden className="pointer-events-none absolute left-1/2 top-[-10%] h-[460px] w-[820px] max-w-[120%] -translate-x-1/2 rounded-full bg-[#1c3e63]/35 blur-[150px]" />
 
         <div className="relative mx-auto max-w-5xl px-4 pt-12 text-center sm:pt-16">
           <p className="text-sm font-semibold tracking-wide text-blue-300 sm:text-base">
             Der KMU-Firmenwertrechner – von Mittelständlern für Mittelständler entwickelt
           </p>
-          <h1 className="mx-auto mt-4 max-w-5xl text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mx-auto mt-4 max-w-5xl font-serif text-4xl font-bold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl">
             Was würde ein Käufer heute für deine Firma{" "}
             <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">wirklich zahlen?</span>
           </h1>
@@ -258,7 +252,7 @@ export default function LandingPage() {
           <div className="grid items-end gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)_minmax(0,1fr)]">
             {/* Michael links */}
             <div className="relative hidden items-end justify-center lg:flex">
-              <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-blue-500/25 blur-3xl" />
+              <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-[#22466c]/35 blur-3xl" />
               <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-2xl shadow-blue-950/50 ring-1 ring-white/10">
                 <Image src="/images/Michael-Otter.png" alt="Michael Polit, Berater bei Otter Consult" width={1112} height={1667} sizes="320px" className="h-auto w-full" />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent px-5 pb-5 pt-14">
@@ -270,7 +264,7 @@ export default function LandingPage() {
 
             {/* Wizard */}
             <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-              <div aria-hidden className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-blue-500/20 blur-3xl" />
+              <div aria-hidden className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-[#2b547f]/30 blur-3xl" />
               <div className="relative">
                 <RechnerWizard />
               </div>
@@ -278,7 +272,7 @@ export default function LandingPage() {
 
             {/* Fabian rechts */}
             <div className="relative hidden items-end justify-center lg:flex">
-              <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-sky-500/25 blur-3xl" />
+              <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-[#22466c]/35 blur-3xl" />
               <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-2xl shadow-blue-950/50 ring-1 ring-white/10">
                 <Image src="/images/Fabian-Otter.png" alt="Fabian Zamzau, Berater bei Otter Consult" width={1707} height={2560} sizes="320px" className="h-auto w-full" />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent px-5 pb-5 pt-14">
@@ -306,20 +300,11 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 2 – WARUM (4 Gründe)                                */}
       {/* ============================================================ */}
-      <section id="warum" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-slate-50 via-blue-50/50 to-slate-50 py-20 sm:py-28">
-        {/* Grid + Glow */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{
-          backgroundImage: "linear-gradient(to right, rgba(37,99,235,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(37,99,235,0.05) 1px, transparent 1px)",
-          backgroundSize: "46px 46px",
-          maskImage: "radial-gradient(ellipse 90% 80% at 50% 30%, black, transparent)",
-          WebkitMaskImage: "radial-gradient(ellipse 90% 80% at 50% 30%, black, transparent)",
-        }} />
-        <div aria-hidden className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-blue-200/40 blur-[120px]" />
-        <div aria-hidden className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-sky-200/40 blur-[120px]" />
+      <section id="warum" className="scroll-mt-24 bg-[#f6f3ec] py-20 sm:py-28">
 
         <div className="relative mx-auto max-w-6xl px-4">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
+            <h2 className="font-serif text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               4 Gründe, warum Mittelständler den eigenentwickelten{" "}
               <span className="whitespace-nowrap text-blue-600">KMU-Firmenwertrechner</span>{" "}
               von der Otter Consult nutzen sollten:
@@ -328,10 +313,9 @@ export default function LandingPage() {
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2">
             {VORTEILE.map((v) => (
-              <div key={v.titel} className="group relative overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-white via-blue-50/40 to-blue-100/50 p-8 shadow-lg shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-900/15">
-                <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-200/40 transition-all duration-500 group-hover:scale-[2.2] group-hover:bg-blue-200/60" />
+              <div key={v.titel} className="group rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_10px_30px_-15px_rgba(13,33,55,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_45px_-18px_rgba(13,33,55,0.22)]">
                 <div className="relative">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-600/30 transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0d2137] text-white shadow-[0_8px_20px_-6px_rgba(13,33,55,0.4)] transition-transform duration-300 group-hover:scale-105">
                     {v.icon}
                   </div>
                   <h3 className="mt-6 text-xl font-bold text-slate-900">{v.titel}</h3>
@@ -355,18 +339,12 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 3 – SO FUNKTIONIERT'S (3 Schritte)                  */}
       {/* ============================================================ */}
-      <section id="ablauf" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20 sm:py-28">
-        <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[760px] max-w-[120%] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[140px]" />
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{
-          backgroundImage: "linear-gradient(to right, rgba(148,163,184,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.06) 1px, transparent 1px)",
-          backgroundSize: "52px 52px",
-          maskImage: "radial-gradient(ellipse 75% 60% at 50% 35%, black, transparent)",
-          WebkitMaskImage: "radial-gradient(ellipse 75% 60% at 50% 35%, black, transparent)",
-        }} />
+      <section id="ablauf" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-[#0e2846] via-[#0b1d33] to-[#0d2137] py-20 sm:py-28">
+        <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[760px] max-w-[120%] -translate-x-1/2 rounded-full bg-[#1c3e63]/30 blur-[150px]" />
         <div className="relative mx-auto max-w-5xl px-4">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-400">So funktioniert&apos;s</span>
-            <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
               In nur 3 Schritten zu deinem individuellen Firmenwert mit DEM KMU-Firmenwertrechner für den Mittelstand
             </h2>
             <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
@@ -421,7 +399,7 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  FOOTER                                                      */}
       {/* ============================================================ */}
-      <footer className="border-t border-white/10 bg-slate-950 py-12">
+      <footer className="border-t border-white/10 bg-[#0d2137] py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between md:gap-10">
             {/* Logo links (größer) */}
