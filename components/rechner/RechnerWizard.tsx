@@ -250,7 +250,8 @@ export default function RechnerWizard() {
               <FormFeld label="E-Mail-Adresse" pflicht type="email" placeholder="max@musterfirma.de"
                 value={email} onChange={(e) => { setEmail(e.target.value); clear("email"); }} fehler={fehler.email} />
               <FormFeld label="Mobilnummer" pflicht type="tel" placeholder="+49 151 12345678"
-                value={mobil} onChange={(e) => { setMobil(e.target.value); clear("mobil"); }} fehler={fehler.mobil} />
+                value={mobil} onChange={(e) => { setMobil(e.target.value); clear("mobil"); }} fehler={fehler.mobil}
+                hilfetext="Dein genaueres Ergebnis erhältst du per WhatsApp." />
               <NavButtons onZurueck={() => gehZu(4)} weiterText="Jetzt Firmenwert erhalten" />
             </form>
           )}
