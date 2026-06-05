@@ -1,4 +1,3 @@
-import Image from "next/image";
 import SiteHeader from "@/components/layout/SiteHeader";
 import SiteFooter from "@/components/layout/SiteFooter";
 
@@ -17,10 +16,6 @@ export default function FunnelShell({ children }: { children: React.ReactNode })
         <div aria-hidden className="pointer-events-none absolute right-[-10%] top-[-8%] h-[480px] w-[480px] rounded-full bg-[#15779b]/[0.05] blur-[130px]" />
         <div aria-hidden className="pointer-events-none absolute bottom-[-14%] left-[-12%] h-[460px] w-[460px] rounded-full bg-[#15779b]/[0.04] blur-[150px]" />
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-        {/* schwaches Logo-Wasserzeichen */}
-        <div aria-hidden className="pointer-events-none absolute bottom-[-3%] right-[-6%] w-[560px] max-w-[62%] opacity-[0.04]">
-          <Image src="/images/Logo-Otter.png" alt="" width={1500} height={1297} className="h-auto w-full" />
-        </div>
 
         <div className="relative mx-auto max-w-3xl px-4 py-12 sm:py-16 lg:py-20">
           <div className="overflow-hidden rounded-3xl bg-white text-left shadow-[0_24px_70px_-24px_rgba(15,40,55,0.22)] ring-1 ring-slate-900/[0.06]">

@@ -54,7 +54,15 @@ export default function SiteFooter() {
             Die Wertermittlung liefert eine unverbindliche erste Orientierung auf Basis des
             Multiplikator-Verfahrens und ersetzt keine individuelle Unternehmensbewertung.
           </p>
-          <p>© 2026 Otter Consult</p>
+          <div className="flex items-center gap-x-5 gap-y-1">
+            <a href="https://otterconsult.de/impressum" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-slate-300">
+              Impressum
+            </a>
+            <a href="https://otterconsult.de/datenschutz" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-slate-300">
+              Datenschutz
+            </a>
+            <span>© 2026 Otter Consult</span>
+          </div>
         </div>
       </div>
     </footer>

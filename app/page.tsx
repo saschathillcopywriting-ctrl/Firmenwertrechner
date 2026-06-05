@@ -54,7 +54,7 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
       </svg>
     ),
     titel: "Hebel zur Wertsteigerung erkennen.",
-    text: "Der Firmenwert ist kein Schicksal. Faktoren wie Inhaberabhängigkeit, wiederkehrende Umsätze oder Kundenstruktur lassen sich gezielt verbessern und den Firmenwert steigern. Genau diese und weitere Faktoren fließen auch in die Bewertung des KMU-Firmenwertrechners ein und helfen dir dabei, zu erkennen, mit welchen Stellschrauben du den Wert deines Unternehmens erhöhen kannst.",
+    text: "Der Firmenwert ist kein Schicksal. Faktoren wie Inhaberabhängigkeit, wiederkehrende Umsätze oder Kundenstruktur lassen sich gezielt verbessern und den Firmenwert steigern. Genau diese und weitere Faktoren fließen auch in die Bewertung des KMU-Firmenwertrechners mit ein und helfen dir dabei, zu erkennen, mit welchen Stellschrauben du den Wert deines Unternehmens erhöhen kannst.",
   },
   {
     icon: (
@@ -63,7 +63,7 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
       </svg>
     ),
     titel: "Realistische Erwartung statt Wunschdenken.",
-    text: "Manche Unternehmer unterschätzen ihre Firma, andere überschätzen sie massiv. Beides kann später zu teuren Fehlentscheidungen führen. Viele Firmenwertrechner arbeiten mit pauschalen Multiplikatoren oder theoretischen Standardwerten. Der KMU-Firmenwertrechner von Otter Consult orientiert sich dagegen an realen Zahlen der letzten Jahre und hilft dir dabei, den Wert deines Unternehmens deutlich realistischer einzuordnen.",
+    text: "Manche Unternehmer unterschätzen ihre Firma, andere überschätzen sie massiv. Beides kann später zu teuren Fehlentscheidungen führen. Viele Firmenwertrechner arbeiten mit pauschalen Multiplikatoren oder theoretischen Standardwerten. Der KMU-Firmenwertrechner von der Otter Consult orientiert sich dagegen an realen Zahlen der letzten Jahre und hilft dir dabei, den Wert deines Unternehmens deutlich realistischer einzuordnen.",
   },
 ];
 
@@ -214,15 +214,17 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto mt-16 max-w-4xl text-center">
-            <div aria-hidden className="mx-auto mb-6 h-px w-16 bg-[#15779b]/50" />
-            <div className="space-y-4 text-lg leading-relaxed text-slate-700">
-              <p>
-                Die meisten Unternehmer kennen den Wert ihrer Firma nicht, obwohl genau dieser Wert oft den größten Teil ihres Vermögens ausmacht.
-              </p>
-              <p>
-                Genau deshalb wurde der KMU-Firmenwertrechner von der Otter Consult entwickelt. Basierend auf einer eigenen Datenbank sowie den Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand liefert er dir in 3 Minuten eine fundierte erste Orientierung über den möglichen Wert deines Unternehmens.
-              </p>
+          <div className="mx-auto mt-16 max-w-6xl">
+            <div className="relative rounded-3xl bg-white px-6 py-10 text-center shadow-[0_18px_50px_-24px_rgba(13,33,55,0.20)] ring-1 ring-stone-200/70 sm:px-8 sm:py-12">
+              <div aria-hidden className="mx-auto mb-6 h-px w-16 bg-[#15779b]/50" />
+              <div className="space-y-4 leading-relaxed text-slate-700">
+                <p className="text-base font-medium text-slate-800">
+                  Die meisten Unternehmer kennen den Wert ihrer Firma nicht, obwohl genau dieser Wert oft den größten Teil ihres Vermögens ausmacht.
+                </p>
+                <p className="text-base text-slate-600">
+                  Genau deshalb wurde der KMU-Firmenwertrechner von der Otter Consult entwickelt. Basierend auf einer eigenen Datenbank sowie den Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand liefert er dir in 3 Minuten eine fundierte erste Orientierung über den möglichen Wert deines Unternehmens.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -234,13 +236,13 @@ export default function LandingPage() {
       <section id="ablauf" className="relative scroll-mt-24 overflow-hidden bg-[#f4f7f8] py-20 sm:py-28">
         <div aria-hidden className="pointer-events-none absolute right-[-6%] top-12 h-[360px] w-[360px] rounded-full bg-[#15779b]/[0.05] blur-[130px]" />
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-        <div className="relative mx-auto max-w-4xl px-4">
-          <div className="mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-6xl text-center">
             <span className="text-sm font-bold uppercase tracking-[0.18em] text-[#15779b]">So funktioniert&apos;s</span>
             <h2 className="mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               In nur 3 Schritten zu deinem individuellen Firmenwert mit DEM KMU-Firmenwertrechner für den Mittelstand
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="mx-auto mt-5 max-w-6xl text-base leading-relaxed text-slate-600">
               Der KMU-Firmenwertrechner von der Otter Consult basiert auf den Erfahrungen aus Hunderten
               Unternehmensverkäufen im Mittelstand sowie auf einer umfangreichen Datenbank realer
               Transaktionen. Dadurch orientiert sich die Bewertung nicht an pauschalen Standardwerten oder
@@ -249,7 +251,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="mt-14 space-y-6">
+          <div className="mx-auto mt-14 max-w-5xl space-y-6">
             {SCHRITTE_HOW.map((s, i) => (
               <div key={s.titel} className="flex flex-col gap-5 rounded-2xl border border-slate-200/80 bg-white p-8 shadow-[0_10px_30px_-15px_rgba(15,33,55,0.12)] sm:flex-row sm:items-center sm:gap-8 sm:p-10">
                 <div className="flex flex-shrink-0 items-baseline gap-3 sm:w-32 sm:flex-col sm:items-start sm:gap-1">
@@ -264,7 +266,7 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <p className="mx-auto mt-14 max-w-2xl text-center leading-relaxed text-slate-600">
+          <p className="mx-auto mt-14 max-w-5xl text-center leading-relaxed text-slate-600">
             In weniger als 5 Minuten erhältst du eine fundierte erste Orientierung darüber, was dein
             Unternehmen heute wert sein könnte – kostenlos, unverbindlich und ohne aufwändige Unterlagen.
           </p>

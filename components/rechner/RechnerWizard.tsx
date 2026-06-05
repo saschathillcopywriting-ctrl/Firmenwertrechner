@@ -31,7 +31,6 @@ const formatZahl = (roh: string) => {
 const opt = (arr: { wert: string; label: string }[]) =>
   arr.map((o) => ({ wert: o.wert, label: o.label }));
 
-const SCHRITT_LABELS = ["Unternehmen", "Zahlen", "Aufstellung", "Zukunft", "Kontakt"];
 
 function StepTitel({ titel, untertitel }: { titel: string; untertitel?: string }) {
   return (
@@ -155,10 +154,10 @@ export default function RechnerWizard() {
         <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-4 sm:px-8">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#15779b]">
-              Firmenwertrechner
+              Der KMU-Firmenwertrechner
             </span>
             <span className="text-xs font-semibold text-slate-500">
-              Schritt {ansicht} von 5 · {SCHRITT_LABELS[ansicht - 1]}
+              Schritt {ansicht} von 5
             </span>
           </div>
           <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
@@ -188,7 +187,7 @@ export default function RechnerWizard() {
           {ansicht === 2 && (
             <form onSubmit={submit2} className="space-y-6">
               <FormFeld
-                label="Ungefährer Jahresumsatz (keine Kommastellen)"
+                label="Ungefährer Jahresumsatz"
                 pflicht
                 inputMode="numeric"
                 placeholder="z. B. 1.200.000"
@@ -199,7 +198,7 @@ export default function RechnerWizard() {
                 fehler={fehler.umsatz}
               />
               <FormFeld
-                label="Ungefährer Gewinn vor Steuern (keine Kommastellen)"
+                label="Ungefährer Gewinn vor Steuern"
                 pflicht
                 inputMode="numeric"
                 placeholder="z. B. 400.000"
