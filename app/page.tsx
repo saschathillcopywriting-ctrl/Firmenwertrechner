@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import RechnerWizard from "@/components/rechner/RechnerWizard";
+import { CtaButton } from "@/components/ui/CtaButton";
+import SiteHeader from "@/components/layout/SiteHeader";
+import SiteFooter from "@/components/layout/SiteFooter";
 
 /* ------------------------------------------------------------------ */
 /*  Icons                                                              */
@@ -18,13 +21,6 @@ function ChevronDown({ className = "h-4 w-4" }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-    </svg>
-  );
-}
-function ArrowUpIcon({ className = "h-5 w-5" }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
     </svg>
   );
 }
@@ -111,23 +107,6 @@ function FaqItem({ frage, antwort, offen, onToggle }: { frage: string; antwort: 
 }
 
 /* ------------------------------------------------------------------ */
-/*  CTA-Button                                                         */
-/* ------------------------------------------------------------------ */
-function CtaButton({ onClick, variant = "primary", className = "", arrow = true }: { onClick: () => void; variant?: "primary" | "dark" | "light"; className?: string; arrow?: boolean }) {
-  const styles = {
-    primary: "bg-[#15779b] text-white shadow-sm hover:bg-[#11607d]",
-    dark: "bg-slate-900 text-white shadow-lg hover:bg-slate-800",
-    light: "bg-white text-slate-900 shadow-lg hover:bg-slate-100",
-  }[variant];
-  return (
-    <button type="button" onClick={onClick} className={`group inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-base font-semibold transition-all duration-300 ${styles} ${className}`}>
-      Jetzt Firmenwert ermitteln
-      {arrow && <ArrowUpIcon className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />}
-    </button>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /*  Landingpage                                                        */
 /* ------------------------------------------------------------------ */
 export default function LandingPage() {
@@ -136,34 +115,9 @@ export default function LandingPage() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   const zumRechner = () => scrollToId("rechner");
 
-  const NAV = [
-    { label: "Warum diesen Firmenwertrechner?", id: "warum" },
-    { label: "So funktioniert's", id: "ablauf" },
-    { label: "Fragen & Antworten", id: "faq" },
-  ];
-
   return (
     <div className="font-sans bg-white">
-      {/* ============================================================ */}
-      {/*  HEADER                                                      */}
-      {/* ============================================================ */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-4 sm:h-24 sm:px-6">
-          <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex flex-shrink-0 items-center" aria-label="Otter Consult – zum Seitenanfang">
-            <Image src="/images/Logo-Otter.png" alt="Otter Consult" width={1500} height={1297} priority className="h-12 w-auto sm:h-16" />
-          </button>
-          <nav className="hidden items-center gap-8 lg:flex">
-            {NAV.map((n) => (
-              <button key={n.id} type="button" onClick={() => scrollToId(n.id)} className="text-sm font-medium text-slate-600 transition-colors hover:text-[#15779b]">
-                {n.label}
-              </button>
-            ))}
-          </nav>
-          <button type="button" onClick={zumRechner} className="flex-shrink-0 rounded-lg bg-[#15779b] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[#11607d] sm:px-6 sm:py-3 sm:text-base">
-            Jetzt Firmenwert ermitteln
-          </button>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* ============================================================ */}
       {/*  SEKTION 1 – HERO                                            */}
@@ -348,41 +302,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/*  FOOTER                                                      */}
-      {/* ============================================================ */}
-      <footer className="border-t border-white/10 bg-[#0e2a37] py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between md:gap-10">
-            {/* Logo links (größer) */}
-            <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex-shrink-0" aria-label="Otter Consult – zum Seitenanfang">
-              <Image src="/images/Logo-Otter.png" alt="Otter Consult" width={1500} height={1297} className="h-14 w-auto brightness-0 invert sm:h-16" />
-            </button>
-
-            {/* Navigation mittig */}
-            <nav className="flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
-              {NAV.map((n) => (
-                <button key={n.id} type="button" onClick={() => scrollToId(n.id)} className="text-sm text-slate-300 transition-colors hover:text-white">
-                  {n.label}
-                </button>
-              ))}
-            </nav>
-
-            {/* CTA rechts */}
-            <div className="flex-shrink-0">
-              <CtaButton onClick={zumRechner} variant="primary" />
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-8 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-xl leading-relaxed">
-              Die Wertermittlung liefert eine unverbindliche erste Orientierung auf Basis des
-              Multiplikator-Verfahrens und ersetzt keine individuelle Unternehmensbewertung.
-            </p>
-            <p>© 2026 Otter Consult</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
