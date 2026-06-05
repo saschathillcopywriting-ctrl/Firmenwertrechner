@@ -33,7 +33,7 @@ export default function NavButtons({
       <button
         type="submit"
         disabled={ladeZustand}
-        className="flex items-center gap-2 rounded-lg bg-blue-600 px-7 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex items-center gap-2 rounded-lg bg-[#15779b] px-7 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#11607d] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {ladeZustand ? "Laden…" : weiterText}
         {!ladeZustand && (

@@ -251,7 +251,7 @@ export default function RechnerWizard() {
         {typeof ansicht === "number" && (
           <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-4 sm:px-8">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600">
+              <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#15779b]">
                 Firmenwertrechner
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -260,7 +260,7 @@ export default function RechnerWizard() {
             </div>
             <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-[#15779b] to-[#11607d] transition-all duration-500"
                 style={{ width: `${(ansicht / 5) * 100}%` }}
               />
             </div>
@@ -271,7 +271,7 @@ export default function RechnerWizard() {
         {(ansicht === "funnel1" || ansicht === "funnel2") && (
           <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-4 sm:px-8">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600">
+              <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#15779b]">
                 Kostenloses Beratungsgespräch
               </span>
               <span className="text-xs font-semibold text-slate-500">
@@ -280,7 +280,7 @@ export default function RechnerWizard() {
             </div>
             <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-[#15779b] to-[#11607d] transition-all duration-500"
                 style={{ width: `${((ansicht === "funnel1" ? 1 : 2) / 2) * 100}%` }}
               />
             </div>
@@ -377,19 +377,19 @@ export default function RechnerWizard() {
           {/* ---------- Ergebnis ---------- */}
           {ansicht === "ergebnis" && ergebnis && (
             <div>
-              <div className="-mx-6 -mt-6 bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 px-6 py-10 text-center text-white sm:-mx-8 sm:-mt-8 sm:px-8 sm:py-12">
+              <div className="-mx-6 -mt-6 bg-gradient-to-br from-slate-900 via-slate-800 to-[#0e3a4d] px-6 py-10 text-center text-white sm:-mx-8 sm:-mt-8 sm:px-8 sm:py-12">
                 <p className="mt-5 text-base font-medium text-slate-300 sm:text-lg">
                   Der aktuell geschätzte Wert deiner Firma liegt bei:
                 </p>
                 <div className="mt-4 flex flex-wrap items-end justify-center gap-x-3 gap-y-1">
                   <span className="text-3xl font-bold tabular-nums sm:text-4xl">{formatEuro(ergebnis.unterWert)}</span>
                   <span className="pb-1 text-slate-400">bis</span>
-                  <span className="text-3xl font-bold tabular-nums text-blue-300 sm:text-4xl">{formatEuro(ergebnis.oberWert)}</span>
+                  <span className="text-3xl font-bold tabular-nums text-[#9ccbdc] sm:text-4xl">{formatEuro(ergebnis.oberWert)}</span>
                 </div>
               </div>
 
               <div className="mt-8 space-y-5">
-                <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-6">
+                <div className="rounded-2xl border border-[#cfe3ea] bg-[#eef5f8] p-6">
                   <p className="text-sm leading-relaxed text-slate-700">
                     Dieser Wert basiert auf deinen Angaben und den aktuellen Marktwerten deiner Branche. Er liefert dir eine erste Orientierung darüber, was dein Unternehmen heute wert sein könnte.
                   </p>
@@ -402,7 +402,7 @@ export default function RechnerWizard() {
 
                   <button
                     onClick={() => gehZu("funnel1")}
-                    className="mt-5 -mx-5 w-[calc(100%_+_2.5rem)] rounded-xl bg-blue-600 px-5 py-4 text-base font-semibold text-white shadow-lg shadow-blue-600/30 transition-colors hover:bg-blue-700"
+                    className="mt-5 -mx-5 w-[calc(100%_+_2.5rem)] rounded-xl bg-[#15779b] px-5 py-4 text-base font-semibold text-white shadow-lg shadow-[#15779b]/30 transition-colors hover:bg-[#11607d]"
                   >
                     Jetzt kostenloses Beratungsgespräch vereinbaren
                   </button>
@@ -442,7 +442,7 @@ export default function RechnerWizard() {
                 <ul className="mt-4 space-y-2.5">
                   {GESPRAECH_VORTEILE.map((v) => (
                     <li key={v} className="flex items-start gap-2.5 text-sm leading-relaxed text-slate-700">
-                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#e0eef3] text-[#15779b]">
                         <svg className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                       </span>
                       {v}
@@ -474,7 +474,7 @@ export default function RechnerWizard() {
                     rows={1}
                     value={anmerkung}
                     onChange={(e) => setAnmerkung(e.target.value)}
-                    className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-colors hover:border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 transition-colors hover:border-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#15779b]"
                   />
                 </div>
               </div>
@@ -524,7 +524,7 @@ export default function RechnerWizard() {
               </div>
 
               {/* Das erwartet dich im Gespräch */}
-              <div className="mt-10 rounded-2xl border border-blue-100 bg-blue-50/70 p-6 text-left">
+              <div className="mt-10 rounded-2xl border border-[#cfe3ea] bg-[#eef5f8] p-6 text-left">
                 <h4 className="text-base font-bold text-slate-900 sm:text-lg">Das erwartet dich im Gespräch:</h4>
                 <ul className="mt-4 space-y-3">
                   {DANKE_VORTEILE.map((v) => (

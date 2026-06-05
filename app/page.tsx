@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import RechnerWizard from "@/components/rechner/RechnerWizard";
 
@@ -94,10 +94,10 @@ const TRUST = ["100 % kostenlos & unverbindlich", "In 3 Minuten erledigt", "Entw
 /* ------------------------------------------------------------------ */
 function FaqItem({ frage, antwort, offen, onToggle }: { frage: string; antwort: string; offen: boolean; onToggle: () => void }) {
   return (
-    <div className={`overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-200 ${offen ? "border-blue-200 bg-white shadow-lg shadow-blue-900/5" : "border-slate-200 bg-white/90 hover:border-slate-300"}`}>
+    <div className={`overflow-hidden rounded-2xl border backdrop-blur-sm transition-all duration-200 ${offen ? "border-[#15779b]/40 bg-white shadow-lg shadow-[#15779b]/5" : "border-slate-200 bg-white/90 hover:border-slate-300"}`}>
       <button type="button" onClick={onToggle} aria-expanded={offen} className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-7">
         <span className="text-base font-semibold text-slate-900 sm:text-lg">{frage}</span>
-        <span className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${offen ? "rotate-180 bg-blue-600 text-white" : "bg-slate-100 text-slate-500"}`}>
+        <span className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${offen ? "rotate-180 bg-[#15779b] text-white" : "bg-slate-100 text-slate-500"}`}>
           <ChevronDown />
         </span>
       </button>
@@ -115,7 +115,7 @@ function FaqItem({ frage, antwort, offen, onToggle }: { frage: string; antwort: 
 /* ------------------------------------------------------------------ */
 function CtaButton({ onClick, variant = "primary", className = "", arrow = true }: { onClick: () => void; variant?: "primary" | "dark" | "light"; className?: string; arrow?: boolean }) {
   const styles = {
-    primary: "bg-blue-600 text-white shadow-sm hover:bg-blue-700",
+    primary: "bg-[#15779b] text-white shadow-sm hover:bg-[#11607d]",
     dark: "bg-slate-900 text-white shadow-lg hover:bg-slate-800",
     light: "bg-white text-slate-900 shadow-lg hover:bg-slate-100",
   }[variant];
@@ -124,67 +124,6 @@ function CtaButton({ onClick, variant = "primary", className = "", arrow = true 
       Jetzt Firmenwert ermitteln
       {arrow && <ArrowUpIcon className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />}
     </button>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  3 Schritte – mit Scroll-Hervorhebung des aktiven Schritts          */
-/* ------------------------------------------------------------------ */
-function AblaufSchritte() {
-  const [aktiv, setAktiv] = useState(0);
-  const refs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setAktiv(Number((e.target as HTMLElement).dataset.index));
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-    );
-    refs.current.forEach((el) => el && obs.observe(el));
-    return () => obs.disconnect();
-  }, []);
-
-  return (
-    <div className="relative mx-auto mt-16 max-w-3xl">
-      {/* Verbindungslinie + Fortschritt */}
-      <div aria-hidden className="absolute bottom-8 left-8 top-8 w-px bg-white/10 sm:left-10" />
-      <div
-        aria-hidden
-        className="absolute left-8 top-8 w-px bg-gradient-to-b from-blue-400 to-blue-600 transition-all duration-700 ease-out sm:left-10"
-        style={{ height: `calc((100% - 4rem) * ${(aktiv + 1) / SCHRITTE_HOW.length})` }}
-      />
-
-      <div className="space-y-6 sm:space-y-10">
-        {SCHRITTE_HOW.map((s, i) => {
-          const on = i === aktiv;
-          return (
-            <div
-              key={s.titel}
-              ref={(el) => { refs.current[i] = el; }}
-              data-index={i}
-              className={`relative flex items-start gap-5 transition-all duration-500 sm:gap-8 ${on ? "opacity-100" : "opacity-45"}`}
-            >
-              <div
-                className={`relative z-10 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl text-2xl font-bold transition-all duration-500 sm:h-20 sm:w-20 ${
-                  on
-                    ? "scale-105 bg-gradient-to-br from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-950/40"
-                    : "bg-white/5 text-slate-400 ring-1 ring-white/10"
-                }`}
-              >
-                {i + 1}
-              </div>
-              <div className={`flex-1 rounded-2xl p-5 transition-all duration-500 sm:p-7 ${on ? "bg-white/[0.06] shadow-xl shadow-black/20 ring-1 ring-white/10 backdrop-blur-sm" : ""}`}>
-                <h3 className={`text-xl font-bold transition-colors duration-500 sm:text-2xl ${on ? "text-white" : "text-slate-300"}`}>{s.titel}</h3>
-                <p className="mt-2 leading-relaxed text-slate-300">{s.text}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
   );
 }
 
@@ -198,13 +137,13 @@ export default function LandingPage() {
   const zumRechner = () => scrollToId("rechner");
 
   const NAV = [
-    { label: "Warum Firmenwert ermitteln?", id: "warum" },
+    { label: "Warum diesen Firmenwertrechner?", id: "warum" },
     { label: "So funktioniert's", id: "ablauf" },
     { label: "Fragen & Antworten", id: "faq" },
   ];
 
   return (
-    <div className="font-sans bg-[#0d2137]">
+    <div className="font-sans bg-white">
       {/* ============================================================ */}
       {/*  HEADER                                                      */}
       {/* ============================================================ */}
@@ -215,12 +154,12 @@ export default function LandingPage() {
           </button>
           <nav className="hidden items-center gap-8 lg:flex">
             {NAV.map((n) => (
-              <button key={n.id} type="button" onClick={() => scrollToId(n.id)} className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600">
+              <button key={n.id} type="button" onClick={() => scrollToId(n.id)} className="text-sm font-medium text-slate-600 transition-colors hover:text-[#15779b]">
                 {n.label}
               </button>
             ))}
           </nav>
-          <button type="button" onClick={zumRechner} className="flex-shrink-0 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-blue-700 sm:px-6 sm:py-3 sm:text-base">
+          <button type="button" onClick={zumRechner} className="flex-shrink-0 rounded-lg bg-[#15779b] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[#11607d] sm:px-6 sm:py-3 sm:text-base">
             Jetzt Firmenwert ermitteln
           </button>
         </div>
@@ -229,19 +168,20 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 1 – HERO                                            */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden bg-[#0d2137]">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0e2846] via-[#0b1d33] to-[#0d2137]" />
-        <div aria-hidden className="pointer-events-none absolute left-1/2 top-[-10%] h-[460px] w-[820px] max-w-[120%] -translate-x-1/2 rounded-full bg-[#1c3e63]/35 blur-[150px]" />
+      <section className="relative overflow-hidden bg-gradient-to-b from-white to-[#f4f7f8]">
+        <div aria-hidden className="pointer-events-none absolute right-[-8%] top-[-12%] h-[420px] w-[420px] rounded-full bg-[#15779b]/[0.06] blur-[120px]" />
+        <div aria-hidden className="pointer-events-none absolute left-[-6%] top-1/3 h-[360px] w-[360px] rounded-full bg-[#15779b]/[0.04] blur-[130px]" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
         <div className="relative mx-auto max-w-5xl px-4 pt-12 text-center sm:pt-16">
-          <p className="text-sm font-semibold tracking-wide text-blue-300 sm:text-base">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#15779b]">
             Der KMU-Firmenwertrechner – von Mittelständlern für Mittelständler entwickelt
           </p>
-          <h1 className="mx-auto mt-4 max-w-5xl font-serif text-4xl font-bold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mx-auto mt-4 max-w-5xl font-serif text-4xl font-bold leading-[1.15] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
             Was würde ein Käufer heute für deine Firma{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">wirklich zahlen?</span>
+            <span className="text-[#15779b]">wirklich zahlen?</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-4xl text-base leading-relaxed text-slate-300 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-4xl text-base leading-relaxed text-slate-600 sm:text-lg">
             Gib ein paar Eckdaten zu deinem Unternehmen an und erhalte sofort eine erste Einschätzung
             deines Firmenwerts – basierend auf Hunderten Unternehmensverkäufen im Mittelstand.
           </p>
@@ -252,32 +192,27 @@ export default function LandingPage() {
           <div className="grid items-end gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)_minmax(0,1fr)]">
             {/* Michael links */}
             <div className="relative hidden items-end justify-center lg:flex">
-              <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-[#22466c]/35 blur-3xl" />
-              <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-2xl shadow-blue-950/50 ring-1 ring-white/10">
+              <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-xl shadow-slate-900/10 ring-1 ring-slate-900/5">
                 <Image src="/images/Michael-Otter.png" alt="Michael Polit, Berater bei Otter Consult" width={1112} height={1667} sizes="320px" className="h-auto w-full" />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent px-5 pb-5 pt-14">
                   <p className="text-base font-bold text-white">Michael Polit</p>
-                  <p className="text-xs text-blue-200">Otter Consult</p>
+                  <p className="text-xs text-[#9ccbdc]">Otter Consult</p>
                 </figcaption>
               </figure>
             </div>
 
             {/* Wizard */}
             <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-              <div aria-hidden className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-[#2b547f]/30 blur-3xl" />
-              <div className="relative">
-                <RechnerWizard />
-              </div>
+              <RechnerWizard />
             </div>
 
             {/* Fabian rechts */}
             <div className="relative hidden items-end justify-center lg:flex">
-              <div aria-hidden className="absolute bottom-8 h-64 w-64 rounded-full bg-[#22466c]/35 blur-3xl" />
-              <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-2xl shadow-blue-950/50 ring-1 ring-white/10">
+              <figure className="relative w-full max-w-[320px] overflow-hidden rounded-3xl shadow-xl shadow-slate-900/10 ring-1 ring-slate-900/5">
                 <Image src="/images/Fabian-Otter.png" alt="Fabian Zamzau, Berater bei Otter Consult" width={1707} height={2560} sizes="320px" className="h-auto w-full" />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent px-5 pb-5 pt-14">
                   <p className="text-base font-bold text-white">Fabian Zamzau</p>
-                  <p className="text-xs text-blue-200">Otter Consult</p>
+                  <p className="text-xs text-[#9ccbdc]">Otter Consult</p>
                 </figcaption>
               </figure>
             </div>
@@ -286,8 +221,8 @@ export default function LandingPage() {
           {/* Trust-Zeile – zentriert, horizontale Reihe, gleichmäßige Abstände */}
           <div className="mx-auto mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-10">
             {TRUST.map((t) => (
-              <span key={t} className="inline-flex items-center gap-2 text-sm text-slate-300">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
+              <span key={t} className="inline-flex items-center gap-2 text-sm text-slate-600">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#15779b]/10 text-[#15779b]">
                   <CheckIcon className="h-3 w-3" />
                 </span>
                 {t}
@@ -306,16 +241,16 @@ export default function LandingPage() {
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="font-serif text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               4 Gründe, warum Mittelständler den eigenentwickelten{" "}
-              <span className="whitespace-nowrap text-blue-600">KMU-Firmenwertrechner</span>{" "}
+              <span className="whitespace-nowrap text-[#15779b]">KMU-Firmenwertrechner</span>{" "}
               von der Otter Consult nutzen sollten:
             </h2>
           </div>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2">
             {VORTEILE.map((v) => (
-              <div key={v.titel} className="group rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_10px_30px_-15px_rgba(13,33,55,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_45px_-18px_rgba(13,33,55,0.22)]">
+              <div key={v.titel} className="group rounded-2xl border border-stone-200/80 bg-white p-8 shadow-[0_10px_30px_-15px_rgba(13,33,55,0.15)] transition-all duration-300 hover:-translate-y-1 hover:border-[#15779b]/30 hover:shadow-[0_22px_45px_-18px_rgba(13,33,55,0.22)]">
                 <div className="relative">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0d2137] text-white shadow-[0_8px_20px_-6px_rgba(13,33,55,0.4)] transition-transform duration-300 group-hover:scale-105">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#15779b] text-white shadow-[0_8px_20px_-6px_rgba(21,119,155,0.45)] transition-transform duration-300 group-hover:scale-105">
                     {v.icon}
                   </div>
                   <h3 className="mt-6 text-xl font-bold text-slate-900">{v.titel}</h3>
@@ -325,13 +260,16 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto mt-14 max-w-3xl space-y-4 text-center leading-relaxed text-slate-600">
-            <p>
-              Die meisten Unternehmer kennen den Wert ihrer Firma nicht, obwohl genau dieser Wert oft den größten Teil ihres Vermögens ausmacht.
-            </p>
-            <p>
-              Genau deshalb wurde der KMU-Firmenwertrechner von der Otter Consult entwickelt. Basierend auf einer eigenen Datenbank sowie den Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand liefert er dir in 3 Minuten eine fundierte erste Orientierung über den möglichen Wert deines Unternehmens.
-            </p>
+          <div className="mx-auto mt-16 max-w-4xl text-center">
+            <div aria-hidden className="mx-auto mb-6 h-px w-16 bg-[#15779b]/50" />
+            <div className="space-y-4 text-lg leading-relaxed text-slate-700">
+              <p>
+                Die meisten Unternehmer kennen den Wert ihrer Firma nicht, obwohl genau dieser Wert oft den größten Teil ihres Vermögens ausmacht.
+              </p>
+              <p>
+                Genau deshalb wurde der KMU-Firmenwertrechner von der Otter Consult entwickelt. Basierend auf einer eigenen Datenbank sowie den Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand liefert er dir in 3 Minuten eine fundierte erste Orientierung über den möglichen Wert deines Unternehmens.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -339,15 +277,16 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  SEKTION 3 – SO FUNKTIONIERT'S (3 Schritte)                  */}
       {/* ============================================================ */}
-      <section id="ablauf" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-[#0e2846] via-[#0b1d33] to-[#0d2137] py-20 sm:py-28">
-        <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[760px] max-w-[120%] -translate-x-1/2 rounded-full bg-[#1c3e63]/30 blur-[150px]" />
-        <div className="relative mx-auto max-w-5xl px-4">
+      <section id="ablauf" className="relative scroll-mt-24 overflow-hidden bg-[#f4f7f8] py-20 sm:py-28">
+        <div aria-hidden className="pointer-events-none absolute right-[-6%] top-12 h-[360px] w-[360px] rounded-full bg-[#15779b]/[0.05] blur-[130px]" />
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+        <div className="relative mx-auto max-w-4xl px-4">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="text-sm font-bold uppercase tracking-[0.15em] text-blue-400">So funktioniert&apos;s</span>
-            <h2 className="mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
+            <span className="text-sm font-bold uppercase tracking-[0.18em] text-[#15779b]">So funktioniert&apos;s</span>
+            <h2 className="mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               In nur 3 Schritten zu deinem individuellen Firmenwert mit DEM KMU-Firmenwertrechner für den Mittelstand
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
+            <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
               Der KMU-Firmenwertrechner von der Otter Consult basiert auf den Erfahrungen aus Hunderten
               Unternehmensverkäufen im Mittelstand sowie auf einer umfangreichen Datenbank realer
               Transaktionen. Dadurch orientiert sich die Bewertung nicht an pauschalen Standardwerten oder
@@ -356,9 +295,22 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <AblaufSchritte />
+          <div className="mt-14 space-y-6">
+            {SCHRITTE_HOW.map((s, i) => (
+              <div key={s.titel} className="flex flex-col gap-5 rounded-2xl border border-slate-200/80 bg-white p-8 shadow-[0_10px_30px_-15px_rgba(15,33,55,0.12)] sm:flex-row sm:items-center sm:gap-8 sm:p-10">
+                <div className="flex flex-shrink-0 items-baseline gap-3 sm:w-32 sm:flex-col sm:items-start sm:gap-1">
+                  <span className="font-serif text-5xl font-bold leading-none text-[#15779b]/25">0{i + 1}</span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#15779b]">Schritt {i + 1}</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 sm:text-2xl">{s.titel}</h3>
+                  <p className="mt-2 leading-relaxed text-slate-600">{s.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
 
-          <p className="mx-auto mt-14 max-w-2xl text-center leading-relaxed text-slate-300">
+          <p className="mx-auto mt-14 max-w-2xl text-center leading-relaxed text-slate-600">
             In weniger als 5 Minuten erhältst du eine fundierte erste Orientierung darüber, was dein
             Unternehmen heute wert sein könnte – kostenlos, unverbindlich und ohne aufwändige Unterlagen.
           </p>
@@ -399,7 +351,7 @@ export default function LandingPage() {
       {/* ============================================================ */}
       {/*  FOOTER                                                      */}
       {/* ============================================================ */}
-      <footer className="border-t border-white/10 bg-[#0d2137] py-12">
+      <footer className="border-t border-white/10 bg-[#0e2a37] py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between md:gap-10">
             {/* Logo links (größer) */}

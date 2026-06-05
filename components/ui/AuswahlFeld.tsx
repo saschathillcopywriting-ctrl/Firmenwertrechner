@@ -18,7 +18,7 @@ export const AuswahlFeld = forwardRef<HTMLSelectElement, AuswahlFeldProps>(
         </label>
         <select
           ref={ref}
-          className={`w-full appearance-none rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+          className={`w-full appearance-none rounded-lg border bg-white px-4 py-3 text-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-[#15779b] focus:border-transparent ${
             fehler
               ? "border-red-400 bg-red-50"
               : "border-gray-200 hover:border-gray-300"

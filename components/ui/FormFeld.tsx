@@ -24,7 +24,7 @@ export const FormFeld = forwardRef<HTMLInputElement, FormFeldProps>(
           )}
           <input
             ref={ref}
-            className={`w-full rounded-lg border px-4 py-3 text-gray-900 placeholder-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+            className={`w-full rounded-lg border px-4 py-3 text-gray-900 placeholder-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#15779b] focus:border-transparent ${
               prefix ? "pl-8" : ""
             } ${
               fehler
