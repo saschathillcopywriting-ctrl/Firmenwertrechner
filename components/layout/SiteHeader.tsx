@@ -37,7 +37,15 @@ export default function SiteHeader() {
             </button>
           ))}
         </nav>
-        <button type="button" onClick={zumRechner} className="flex-shrink-0 rounded-lg bg-[#15779b] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[#11607d] sm:px-6 sm:py-3 sm:text-base">
+        <button
+          type="button"
+          onClick={zumRechner}
+          className={`flex-shrink-0 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-300 sm:px-6 sm:py-3 sm:text-base ${
+            istLanding
+              ? "bg-[#15779b] text-white shadow-sm hover:bg-[#11607d]"
+              : "border border-slate-300 bg-white/70 text-slate-600 hover:border-[#15779b] hover:text-[#15779b]"
+          }`}
+        >
           Jetzt Firmenwert ermitteln
         </button>
       </div>

@@ -98,7 +98,7 @@ export default function ErstgespraechPage() {
   return (
     <FunnelShell>
       {/* Fortschritt im Beratungs-Funnel */}
-      <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-4 sm:px-8">
+      <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-5 sm:px-12">
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#15779b]">
             Kostenloses Beratungsgespräch
@@ -115,7 +115,7 @@ export default function ErstgespraechPage() {
         </div>
       </div>
 
-      <div className="p-6 sm:p-8">
+      <div className="px-6 py-8 sm:px-12 sm:py-10">
         {/* ---------- Schritt 1 von 2 ---------- */}
         {schritt === 1 && (
           <form onSubmit={submitFunnel1} className="space-y-7">

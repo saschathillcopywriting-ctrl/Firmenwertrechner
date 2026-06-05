@@ -12,7 +12,7 @@ const DANKE_VORTEILE = [
 export default function DankePage() {
   return (
     <FunnelShell>
-      <div className="p-6 sm:p-8">
+      <div className="px-6 py-10 sm:px-12 sm:py-12">
         <div className="text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
             <svg className="h-8 w-8 text-emerald-600" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
