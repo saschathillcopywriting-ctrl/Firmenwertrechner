@@ -54,7 +54,7 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
       </svg>
     ),
     titel: "Hebel zur Wertsteigerung erkennen.",
-    text: "Der Firmenwert ist kein Schicksal. Faktoren wie Inhaberabhängigkeit, wiederkehrende Umsätze oder Kundenstruktur lassen sich gezielt verbessern und den Firmenwert steigern. Genau diese und weitere Faktoren fließen auch in die Bewertung des KMU-Firmenwertrechners mit ein und helfen dir dabei, zu erkennen, mit welchen Stellschrauben du den Wert deines Unternehmens erhöhen kannst.",
+    text: "Der Firmenwert ist kein Schicksal. Faktoren wie Inhaberabhängigkeit, wiederkehrende Umsätze oder Kundenstrukturen lassen sich gezielt verbessern und den Firmenwert steigern. Genau diese und weitere Faktoren fließen auch in die Bewertung des KMU-Firmenwertrechners mit ein und helfen dir dabei, zu erkennen, mit welchen Stellschrauben du den Wert deines Unternehmens erhöhen kannst.",
   },
   {
     icon: (
@@ -63,13 +63,13 @@ const VORTEILE: { icon: React.ReactNode; titel: string; text: string }[] = [
       </svg>
     ),
     titel: "Realistische Erwartung statt Wunschdenken.",
-    text: "Manche Unternehmer unterschätzen ihre Firma, andere überschätzen sie massiv. Beides kann später zu teuren Fehlentscheidungen führen. Viele Firmenwertrechner arbeiten mit pauschalen Multiplikatoren oder theoretischen Standardwerten. Der KMU-Firmenwertrechner von der Otter Consult orientiert sich dagegen an realen Zahlen der letzten Jahre und hilft dir dabei, den Wert deines Unternehmens deutlich realistischer einzuordnen.",
+    text: "Manche Unternehmer unterschätzen den Wert ihrer Firma, andere überschätzen ihn massiv. Beides kann später zu teuren Fehlentscheidungen führen. Viele Firmenwertrechner arbeiten mit pauschalen Multiplikatoren oder theoretischen Standardwerten. Der KMU-Firmenwertrechner von der Otter Consult orientiert sich dagegen an realen Zahlen der letzten Jahre und hilft dir dabei, den Wert deines Unternehmens deutlich realistischer einzuordnen.",
   },
 ];
 
 const SCHRITTE_HOW: { titel: string; text: string }[] = [
   { titel: "Eckdaten eingeben.", text: "Du trägst deine Branche, Umsatz und Gewinn ein und beantwortest ein paar kurze Fragen zu deinem Unternehmen. Das Ganze dauert nur wenige Minuten." },
-  { titel: "Praxisdaten statt Standardwerte.", text: "Neben deinen Unternehmenszahlen berücksichtigt der Rechner Faktoren, die auch in realen Verkaufsprozessen eine wichtige Rolle spielen – zum Beispiel Inhaberabhängigkeit, Kundenstruktur oder wiederkehrende Umsätze." },
+  { titel: "Praxisdaten statt Standardwerte.", text: "Neben deinen Unternehmenszahlen berücksichtigt der Rechner Faktoren, die auch in realen Verkaufsprozessen eine wichtige Rolle spielen – zum Beispiel Inhaberabhängigkeit, Kundenstruktur oder wiederkehrende Umsätze. Die Bewertung basiert dabei nicht auf pauschalen Standardwerten, sondern auf den Erkenntnissen aus Hunderten begleiteten Unternehmensverkäufen sowie einer eigenen Transaktionsdatenbank." },
   { titel: "Dein individuelles Ergebnis.", text: "Du erhältst sofort auf der Seite eine realistische erste Einschätzung deines Firmenwerts – basierend auf Erfahrungen aus Hunderten Unternehmensverkäufen im Mittelstand." },
 ];
 
@@ -267,7 +267,7 @@ export default function LandingPage() {
           </div>
 
           <p className="mx-auto mt-14 max-w-5xl text-center leading-relaxed text-slate-600">
-            In weniger als 5 Minuten erhältst du eine fundierte erste Orientierung darüber, was dein
+            In nur 3 Minuten erhältst du eine fundierte erste Orientierung darüber, was dein
             Unternehmen heute wert sein könnte – kostenlos, unverbindlich und ohne aufwändige Unterlagen.
           </p>
           <div className="mt-8 flex justify-center">
