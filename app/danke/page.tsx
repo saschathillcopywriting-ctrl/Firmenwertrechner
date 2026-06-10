@@ -6,7 +6,7 @@ const DANKE_VORTEILE = [
   "Eine Einordnung deines Unternehmenswertes anhand deiner individuellen Situation",
   "Hinweise auf Werttreiber und mögliche Risiken in deinem Unternehmen",
   "Erste Empfehlungen, wie sich der Firmenwert häufig steigern lässt",
-  "Antworten auf deine Fragen zu Nachfolge, Verkauf oder Unternehmensentwicklung sowie Antworten auf alle deine Fragen.",
+  "Antworten auf deine Fragen zu Nachfolge, Verkauf oder Unternehmensentwicklung sowie Antworten auf alle weiteren Fragen.",
 ];
 
 export default function DankePage() {

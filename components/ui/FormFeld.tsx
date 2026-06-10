@@ -35,7 +35,7 @@ export const FormFeld = forwardRef<HTMLInputElement, FormFeldProps>(
           />
         </div>
         {fehler && <p className="text-xs text-red-500">{fehler}</p>}
-        {hilfetext && !fehler && <p className="text-xs text-gray-400 leading-relaxed">{hilfetext}</p>}
+        {hilfetext && !fehler && <p className="text-sm font-medium text-black leading-relaxed">{hilfetext}</p>}
       </div>
     );
   }

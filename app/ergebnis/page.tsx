@@ -56,15 +56,15 @@ export default function ErgebnisPage() {
 
           {/* Körper */}
           <div className="px-6 py-8 sm:px-12 sm:py-10">
-            <div className="space-y-4 text-[15px] leading-relaxed text-slate-700 sm:text-base">
-              <p>
-                Dieser Wert basiert auf deinen Angaben und den aktuellen Marktwerten deiner Branche. Er liefert dir eine erste Orientierung darüber, was dein Unternehmen heute wert sein könnte.
+            <div className="text-center">
+              <h2 className="text-2xl font-bold leading-snug text-slate-900 sm:text-3xl">
+                Du möchtest ein noch genaueres Ergebnis deines Firmenwerts erhalten – und zudem erfahren, mit welchen konkreten Hebeln du ihn gezielt nach oben steigerst?
+              </h2>
+              <p className="mt-4 text-base font-semibold text-[#15779b] sm:text-lg">
+                Dann sichere dir jetzt dein kostenloses und unverbindliches Beratungsgespräch.
               </p>
-              <p>
-                Der tatsächliche Verkaufspreis wird jedoch von vielen weiteren Faktoren beeinflusst. Genau hier entstehen häufig die größten Unterschiede und oft auch die größten Potenziale.
-              </p>
-              <p>
-                In einem kostenlosen und unverbindlichen Gespräch analysieren wir gemeinsam deine individuelle Situation. Du erfährst, welchen Wert dein Unternehmen realistisch erzielen kann und welche Maßnahmen den Unternehmenswert oft schon innerhalb kurzer Zeit deutlich steigern können.
+              <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-slate-600 sm:text-base">
+                Gemeinsam blicken wir hinter den errechneten Wert und schauen uns dein Unternehmen im Detail an. Anhand vieler Faktoren, die kein Rechner der Welt erfassen kann. Du erfährst, was deine Firma wirklich wert ist und mit welchen konkreten Hebeln du diesen Wert aktiv steigerst.
               </p>
             </div>
 

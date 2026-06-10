@@ -240,7 +240,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-6xl text-center">
             <span className="text-sm font-bold uppercase tracking-[0.18em] text-[#15779b]">So funktioniert&apos;s</span>
             <h2 className="mt-3 font-serif text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-              In nur 3 Schritten zu deinem individuellen Firmenwert mit DEM KMU-Firmenwertrechner für den Mittelstand
+              In nur 3 Schritten zu deinem individuellen Firmenwert mit DEM KMU-FIRMENWERTRECHNER für den Mittelstand
             </h2>
             <p className="mx-auto mt-5 max-w-6xl text-base leading-relaxed text-slate-600">
               Der KMU-Firmenwertrechner von der Otter Consult basiert auf den Erfahrungen aus Hunderten
