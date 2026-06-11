@@ -53,7 +53,7 @@ export default function ErgebnisPage() {
                   <span className="text-4xl font-bold leading-none tabular-nums sm:text-5xl lg:text-6xl">0 €</span>
                 </div>
                 <p className="relative mt-6 text-base font-medium text-slate-300 sm:text-lg">
-                  Damit ist deine Firma aktuell nicht verkaufbar.
+                  Dein Unternehmen ist in der aktuellen Form nicht verkaufbar.
                 </p>
               </>
             ) : (
