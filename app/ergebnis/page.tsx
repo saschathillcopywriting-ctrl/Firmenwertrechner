@@ -47,11 +47,22 @@ export default function ErgebnisPage() {
             <p className="relative text-base font-medium text-slate-300 sm:text-lg">
               Der aktuell geschätzte Wert deiner Firma liegt bei:
             </p>
-            <div className="relative mt-6 flex flex-col items-center gap-1.5">
-              <span className="text-4xl font-bold leading-none tabular-nums sm:text-5xl lg:text-6xl">{formatEuro(ergebnis.unterWert)}</span>
-              <span className="text-base font-medium text-slate-400">bis</span>
-              <span className="text-4xl font-bold leading-none tabular-nums text-[#9ccbdc] sm:text-5xl lg:text-6xl">{formatEuro(ergebnis.oberWert)}</span>
-            </div>
+            {ergebnis.firmenwert <= 0 ? (
+              <>
+                <div className="relative mt-6 flex flex-col items-center gap-1.5">
+                  <span className="text-4xl font-bold leading-none tabular-nums sm:text-5xl lg:text-6xl">0 €</span>
+                </div>
+                <p className="relative mt-6 text-base font-medium text-slate-300 sm:text-lg">
+                  Damit ist deine Firma aktuell nicht verkaufbar.
+                </p>
+              </>
+            ) : (
+              <div className="relative mt-6 flex flex-col items-center gap-1.5">
+                <span className="text-4xl font-bold leading-none tabular-nums sm:text-5xl lg:text-6xl">{formatEuro(ergebnis.unterWert)}</span>
+                <span className="text-base font-medium text-slate-400">bis</span>
+                <span className="text-4xl font-bold leading-none tabular-nums text-[#9ccbdc] sm:text-5xl lg:text-6xl">{formatEuro(ergebnis.oberWert)}</span>
+              </div>
+            )}
           </div>
 
           {/* Körper */}
