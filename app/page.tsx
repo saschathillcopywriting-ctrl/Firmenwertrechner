@@ -174,14 +174,23 @@ export default function LandingPage() {
 
           {/* Trust-Zeile – zentriert, horizontale Reihe, gleichmäßige Abstände */}
           <div className="mx-auto mt-8 flex flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-10">
-            {TRUST.map((t, i) => (
-              <span key={t} className={`inline-flex gap-2 text-sm text-slate-600 ${i === 2 ? "items-start max-w-[17rem] sm:items-center sm:max-w-none" : "items-center"}`}>
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#15779b]/10 text-[#15779b]">
-                  <CheckIcon className="h-3 w-3" />
+            {TRUST.map((t, i) =>
+              i === 2 ? (
+                <span key={t} className="block max-w-[15rem] text-center text-sm text-slate-600 sm:inline-flex sm:max-w-none sm:items-center sm:gap-2 sm:text-left">
+                  <span className="mr-2 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#15779b]/10 align-middle text-[#15779b] sm:mr-0">
+                    <CheckIcon className="h-3 w-3" />
+                  </span>
+                  {t}
                 </span>
-                {t}
-              </span>
-            ))}
+              ) : (
+                <span key={t} className="inline-flex items-center gap-2 text-sm text-slate-600">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#15779b]/10 text-[#15779b]">
+                    <CheckIcon className="h-3 w-3" />
+                  </span>
+                  {t}
+                </span>
+              )
+            )}
           </div>
         </div>
       </section>
