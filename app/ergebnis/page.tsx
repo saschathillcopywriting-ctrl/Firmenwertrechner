@@ -6,7 +6,20 @@ import { useFormularStore } from "@/store/formular-store";
 import { berechne, formatEuro } from "@/lib/berechnung";
 import FunnelShell from "@/components/funnel/FunnelShell";
 
-function Haken({ text }: { text: string }) {
+function Haken({ text, breit = false }: { text: string; breit?: boolean }) {
+  if (breit) {
+    // Mobile: zentrierte Einheit mit Häkchen inline direkt vor dem Text; Desktop wie gehabt.
+    return (
+      <span className="block text-center text-xs leading-snug text-slate-600 sm:flex sm:items-center sm:justify-center sm:gap-2">
+        <span className="mr-2 inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 align-middle sm:mr-0">
+          <svg className="h-3 w-3 text-emerald-600" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </span>
+        {text}
+      </span>
+    );
+  }
   return (
     <span className="flex items-center justify-center gap-2 text-center">
       <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100">
@@ -91,7 +104,7 @@ export default function ErgebnisPage() {
               <div className="mt-6 grid grid-cols-1 gap-3 border-t border-[#cfe3ea]/80 pt-6 sm:grid-cols-3 sm:gap-4">
                 <Haken text="100 % kostenlos und unverbindlich" />
                 <Haken text="Experten aus dem Mittelstand" />
-                <Haken text="Über 125 Mio. € jährliches Transaktionsvolumen" />
+                <Haken text="Über 125 Mio. € jährliches Transaktionsvolumen" breit />
               </div>
             </div>
 

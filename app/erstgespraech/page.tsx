@@ -103,7 +103,7 @@ export default function ErstgespraechPage() {
           <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#15779b]">
             Kostenloses Beratungsgespräch
           </span>
-          <span className="text-xs font-semibold text-slate-500">
+          <span className="text-xs font-semibold text-slate-500 max-sm:whitespace-nowrap">
             Schritt {schritt} von 2
           </span>
         </div>

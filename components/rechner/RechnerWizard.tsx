@@ -156,7 +156,7 @@ export default function RechnerWizard() {
             <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#15779b]">
               Der KMU-Firmenwertrechner
             </span>
-            <span className="text-xs font-semibold text-slate-500">
+            <span className="text-xs font-semibold text-slate-500 max-sm:whitespace-nowrap">
               Schritt {ansicht} von 5
             </span>
           </div>
